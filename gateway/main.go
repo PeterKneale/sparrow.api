@@ -30,10 +30,10 @@ func main() {
 	}
 	db.LogMode(true)
 
-	db.DropTable(&models.UserData{})
-	db.DropTable(&models.AccountData{})
-	db.AutoMigrate(&models.UserData{})
-	db.AutoMigrate(&models.AccountData{})
+	//db.DropTable(&models.UserData{})
+	//db.DropTable(&models.AccountData{})
+	//db.AutoMigrate(&models.UserData{})
+	//db.AutoMigrate(&models.AccountData{})
 
 	userdb = models.NewUserDataDB(db)
 	accountdb = models.NewAccountDataDB(db)
@@ -61,17 +61,21 @@ func main() {
 	c3 := controllers.NewHealthController(service)
 	app.MountHealthController(service, c3)
 
-	// Mount web controller onto service
-	pc := controllers.NewWebController(service)
-	app.MountWebController(service, pc)
-
-	// Mount js controller onto service
-	jc := controllers.NewJsController(service)
-	app.MountJsController(service, jc)
-
-	// Mount swagger controller onto service
-	sc := controllers.NewSwaggerController(service)
-	app.MountSwaggerController(service, sc)
+	// Mount "js1" controller
+	c4 := controllers.NewJs1Controller(service)
+	app.MountJs1Controller(service, c4)
+	// Mount "js2" controller
+	c5 := controllers.NewJs2Controller(service)
+	app.MountJs2Controller(service, c5)
+	// Mount "swagger" controller
+	c6 := controllers.NewSwaggerController(service)
+	app.MountSwaggerController(service, c6)
+	// Mount "web1" controller
+	c7 := controllers.NewWeb1Controller(service)
+	app.MountWeb1Controller(service, c7)
+	// Mount "web2" controller
+	c8 := controllers.NewWeb2Controller(service)
+	app.MountWeb2Controller(service, c8)
 
 	// Start service
 	if err := service.ListenAndServe(":8080"); err != nil {

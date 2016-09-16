@@ -59,17 +59,25 @@ func (c *UserController) Delete(ctx *app.DeleteUserContext) error {
 // List runs the list action.
 func (c *UserController) List(ctx *app.ListUserContext) error {
 	users, err := c.userdb.List(ctx)
-
 	if err != nil {
 		return ErrDatabaseError(err)
 	}
 
-	res := make(app.UserTinyCollection, len(users))
-	for i, user := range users {
-		res[i] = ToUserTiny(user)
+	mode := ctx.Params.Get("mode")
+	if mode == "tiny" {
+		res := make(app.UserTinyCollection, len(users))
+		for i, user := range users {
+			res[i] = ToUserTiny(user)
+		}
+		return ctx.OKTiny(res)
 	}
 
-	return ctx.OKTiny(res)
+	res := make(app.UserCollection, len(users))
+	for i, user := range users {
+		res[i] = ToUserMedia(user)
+	}
+
+	return ctx.OK(res)
 }
 
 // Read runs the read action.

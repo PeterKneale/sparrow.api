@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/goatest"
-	"github.com/simplicate/mango/gateway/app"
+	"github.com/simplicate/mango/gateway/temp/app"
 	"golang.org/x/net/context"
 	"io"
 	"log"
