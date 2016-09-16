@@ -107,26 +107,21 @@
         }
       });
       requirejs(['client', 'jquery', 'bootstrap'], function (client) {
-        client().aliveHealth ("/alive")
-          .then(function (response) {
-            client().listUser ("/users")
-              .then(function(response){
-                var users = response.data;
-                for(var i in users) {
-                  var user = users[i];
+       
+          client().listUser ("/users")
+            .then(function(response){
+              var users = response.data;
+              for(var i in users) {
+                var user = users[i];
 
-                  $('#users').append(
-                          $('<a>')
-                            .attr('href',user.href)
-                            .attr('class',"list-group-item")
-                            .append(user.name + " [" + user.id + "]")); 
-                }
-              })
-          })
-          .catch(function (resp) {
-            alert("service not alive")
-          });
-      });
+                $('#users').append(
+                        $('<a>')
+                          .attr('href',user.href)
+                          .attr('class',"list-group-item")
+                          .append(user.name + " [" + user.id + "]")); 
+              }
+            });
+        });
     </script>
 
   </body>
