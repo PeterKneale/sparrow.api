@@ -4,6 +4,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/simplicate/mango/gateway/app"
 	"github.com/simplicate/mango/gateway/controllers"
@@ -16,6 +17,8 @@ import (
 )
 
 func main() {
+
+	displayEnvironmentVariables()
 
 	var db *gorm.DB
 	var userdb *models.UserDataDB
@@ -49,32 +52,24 @@ func main() {
 	service.Use(middleware.ErrorHandler(service, true))
 	service.Use(middleware.Recover())
 
-	// Mount "Account" controller
-	c := controllers.NewAccountController(service, accountdb)
-	app.MountAccountController(service, c)
-
-	// Mount "User" controller
-	c2 := controllers.NewUserController(service, userdb)
-	app.MountUserController(service, c2)
-
-	// Mount "health" controller
-	c3 := controllers.NewHealthController(service)
-	app.MountHealthController(service, c3)
-
-	// Mount "js" controller
-	c4 := controllers.NewJsController(service)
-	app.MountJsController(service, c4)
-
-	// Mount "swagger" controller
-	c5 := controllers.NewSwaggerController(service)
-	app.MountSwaggerController(service, c5)
-
-	// Mount "web" controller
-	c6 := controllers.NewWebController(service)
-	app.MountWebController(service, c6)
+	app.MountAccountController(service, controllers.NewAccountController(service, accountdb))
+	app.MountUserController(service, controllers.NewUserController(service, userdb))
+	app.MountHealthController(service, controllers.NewHealthController(service))
+	app.MountJsController(service, controllers.NewJsController(service))
+	app.MountSwaggerController(service, controllers.NewSwaggerController(service))
+	app.MountWebController(service, controllers.NewWebController(service))
 
 	// Start service
-	if err := service.ListenAndServe(":8080"); err != nil {
+	if err := service.ListenAndServe("0.0.0.0:80"); err != nil {
 		service.LogError("startup", "err", err)
 	}
+}
+
+func displayEnvironmentVariables() {
+
+	fmt.Println("Environment variables:")
+	for _, e := range os.Environ() {
+		fmt.Println(e)
+	}
+
 }

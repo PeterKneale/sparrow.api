@@ -1,0 +1,20 @@
+version: '2'
+services:
+  lb:
+    image: 'dockercloud/haproxy:latest'
+    links:
+      - api
+    ports:
+      - '80:80'
+      - '1936:1936'
+    
+  api:
+    image: 'peterkneale/mango:latest'
+    links:
+      - db
+
+  db:
+    image: 'postgres:latest'
+    environment:
+      POSTGRES_PASSWORD: 'password123'
+
