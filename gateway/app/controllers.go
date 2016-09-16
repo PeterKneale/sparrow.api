@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/mango/gateway/design
-// --out=C:\dev\go\src\github.com\simplicate\mango\gateway\temp
+// --out=$(GOPATH)\src\github.com\Simplicate\mango\gateway\temp
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -246,78 +246,31 @@ func MountHealthController(service *goa.Service, ctrl HealthController) {
 	service.LogInfo("mount", "ctrl", "Health", "action", "Alive", "route", "GET /alive")
 }
 
-// Js1Controller is the controller interface for the Js1 actions.
-type Js1Controller interface {
+// JsController is the controller interface for the Js actions.
+type JsController interface {
 	goa.Muxer
 	goa.FileServer
 }
 
-// MountJs1Controller "mounts" a Js1 resource controller on the given service.
-func MountJs1Controller(service *goa.Service, ctrl Js1Controller) {
+// MountJsController "mounts" a Js resource controller on the given service.
+func MountJsController(service *goa.Service, ctrl JsController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/js1/*filepath", ctrl.MuxHandler("preflight", handleJs1Origin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/js/*filepath", ctrl.MuxHandler("preflight", handleJsOrigin(cors.HandlePreflight()), nil))
 
-	h = ctrl.FileHandler("/js1/*filepath", "web1/js1")
-	h = handleJs1Origin(h)
-	service.Mux.Handle("GET", "/js1/*filepath", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Js1", "files", "web1/js1", "route", "GET /js1/*filepath")
+	h = ctrl.FileHandler("/js/*filepath", "web/js")
+	h = handleJsOrigin(h)
+	service.Mux.Handle("GET", "/js/*filepath", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Js", "files", "web/js", "route", "GET /js/*filepath")
 
-	h = ctrl.FileHandler("/js1/", "web1\\js1\\index.html")
-	h = handleJs1Origin(h)
-	service.Mux.Handle("GET", "/js1/", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Js1", "files", "web1\\js1\\index.html", "route", "GET /js1/")
+	h = ctrl.FileHandler("/js/", "web\\js\\index.html")
+	h = handleJsOrigin(h)
+	service.Mux.Handle("GET", "/js/", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Js", "files", "web\\js\\index.html", "route", "GET /js/")
 }
 
-// handleJs1Origin applies the CORS response headers corresponding to the origin.
-func handleJs1Origin(h goa.Handler) goa.Handler {
-
-	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
-		origin := req.Header.Get("Origin")
-		if origin == "" {
-			// Not a CORS request
-			return h(ctx, rw, req)
-		}
-		if cors.MatchOrigin(origin, "*") {
-			ctx = goa.WithLogContext(ctx, "origin", origin)
-			rw.Header().Set("Access-Control-Allow-Origin", origin)
-			rw.Header().Set("Access-Control-Allow-Credentials", "false")
-			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
-				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-			}
-			return h(ctx, rw, req)
-		}
-
-		return h(ctx, rw, req)
-	}
-}
-
-// Js2Controller is the controller interface for the Js2 actions.
-type Js2Controller interface {
-	goa.Muxer
-	goa.FileServer
-}
-
-// MountJs2Controller "mounts" a Js2 resource controller on the given service.
-func MountJs2Controller(service *goa.Service, ctrl Js2Controller) {
-	initService(service)
-	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/js2/*filepath", ctrl.MuxHandler("preflight", handleJs2Origin(cors.HandlePreflight()), nil))
-
-	h = ctrl.FileHandler("/js2/*filepath", "web2/js2")
-	h = handleJs2Origin(h)
-	service.Mux.Handle("GET", "/js2/*filepath", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Js2", "files", "web2/js2", "route", "GET /js2/*filepath")
-
-	h = ctrl.FileHandler("/js2/", "web2\\js2\\index.html")
-	h = handleJs2Origin(h)
-	service.Mux.Handle("GET", "/js2/", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Js2", "files", "web2\\js2\\index.html", "route", "GET /js2/")
-}
-
-// handleJs2Origin applies the CORS response headers corresponding to the origin.
-func handleJs2Origin(h goa.Handler) goa.Handler {
+// handleJsOrigin applies the CORS response headers corresponding to the origin.
+func handleJsOrigin(h goa.Handler) goa.Handler {
 
 	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		origin := req.Header.Get("Origin")
@@ -352,10 +305,10 @@ func MountSwaggerController(service *goa.Service, ctrl SwaggerController) {
 	var h goa.Handler
 	service.Mux.Handle("OPTIONS", "/swagger.json", ctrl.MuxHandler("preflight", handleSwaggerOrigin(cors.HandlePreflight()), nil))
 
-	h = ctrl.FileHandler("/swagger.json", "web1/swagger/swagger.json")
+	h = ctrl.FileHandler("/swagger.json", "web/swagger/swagger.json")
 	h = handleSwaggerOrigin(h)
 	service.Mux.Handle("GET", "/swagger.json", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Swagger", "files", "web1/swagger/swagger.json", "route", "GET /swagger.json")
+	service.LogInfo("mount", "ctrl", "Swagger", "files", "web/swagger/swagger.json", "route", "GET /swagger.json")
 }
 
 // handleSwaggerOrigin applies the CORS response headers corresponding to the origin.
@@ -382,68 +335,26 @@ func handleSwaggerOrigin(h goa.Handler) goa.Handler {
 	}
 }
 
-// Web1Controller is the controller interface for the Web1 actions.
-type Web1Controller interface {
+// WebController is the controller interface for the Web actions.
+type WebController interface {
 	goa.Muxer
 	goa.FileServer
 }
 
-// MountWeb1Controller "mounts" a Web1 resource controller on the given service.
-func MountWeb1Controller(service *goa.Service, ctrl Web1Controller) {
+// MountWebController "mounts" a Web resource controller on the given service.
+func MountWebController(service *goa.Service, ctrl WebController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/web1", ctrl.MuxHandler("preflight", handleWeb1Origin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/web", ctrl.MuxHandler("preflight", handleWebOrigin(cors.HandlePreflight()), nil))
 
-	h = ctrl.FileHandler("/web1", "web1/index.html")
-	h = handleWeb1Origin(h)
-	service.Mux.Handle("GET", "/web1", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Web1", "files", "web1/index.html", "route", "GET /web1")
+	h = ctrl.FileHandler("/web", "web/index.html")
+	h = handleWebOrigin(h)
+	service.Mux.Handle("GET", "/web", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Web", "files", "web/index.html", "route", "GET /web")
 }
 
-// handleWeb1Origin applies the CORS response headers corresponding to the origin.
-func handleWeb1Origin(h goa.Handler) goa.Handler {
-
-	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
-		origin := req.Header.Get("Origin")
-		if origin == "" {
-			// Not a CORS request
-			return h(ctx, rw, req)
-		}
-		if cors.MatchOrigin(origin, "*") {
-			ctx = goa.WithLogContext(ctx, "origin", origin)
-			rw.Header().Set("Access-Control-Allow-Origin", origin)
-			rw.Header().Set("Access-Control-Allow-Credentials", "false")
-			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
-				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET, OPTIONS")
-			}
-			return h(ctx, rw, req)
-		}
-
-		return h(ctx, rw, req)
-	}
-}
-
-// Web2Controller is the controller interface for the Web2 actions.
-type Web2Controller interface {
-	goa.Muxer
-	goa.FileServer
-}
-
-// MountWeb2Controller "mounts" a Web2 resource controller on the given service.
-func MountWeb2Controller(service *goa.Service, ctrl Web2Controller) {
-	initService(service)
-	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/web2", ctrl.MuxHandler("preflight", handleWeb2Origin(cors.HandlePreflight()), nil))
-
-	h = ctrl.FileHandler("/web2", "web2/index.html")
-	h = handleWeb2Origin(h)
-	service.Mux.Handle("GET", "/web2", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Web2", "files", "web2/index.html", "route", "GET /web2")
-}
-
-// handleWeb2Origin applies the CORS response headers corresponding to the origin.
-func handleWeb2Origin(h goa.Handler) goa.Handler {
+// handleWebOrigin applies the CORS response headers corresponding to the origin.
+func handleWebOrigin(h goa.Handler) goa.Handler {
 
 	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		origin := req.Header.Get("Origin")

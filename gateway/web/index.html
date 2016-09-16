@@ -1,14 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mango</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!--<link rel="stylesheet" href="css/base.css" />-->
+    <script src="https://unpkg.com/react@15.3.0/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.0/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/remarkable@1.6.2/dist/remarkable.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -24,11 +29,12 @@
       .navbar {
         margin-bottom: 20px;
       }
-  </style>
+    </style>
 
   </head>
   <body>
-   <div class="container">
+   
+    <div class="container">
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -70,59 +76,20 @@
 
       <div class="jumbotron">
         <h1>Mango</h1>
-        <p>Demo using GO / GOA / GORM / GORMA</p>
+        <p>Demo using GO / GOA / GORM / GORMA / REACT JS</p>
         <p>
           
         </p>
       </div>
-      <div class="row">
-          <div class="col-xs-12">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Users</h3>
-              </div>
-                <div id="users" class="list-group"></div>
-            </div>
 
-              
-          </div>
+      <div id="content" class="row">
       </div>
-      
-    </div> <!-- /container -->
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.16/require.min.js"></script>
-    <script>
-      requirejs.config({
-        shim : {
-          bootstrap : {
-            deps : [ 'jquery'],
-            exports: 'Bootstrap'
-          }
-        },
-        paths: {
-          axios: '/js1/axios.min',
-          client: '/js1/client',
-          jquery: "//ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min",
-          bootstrap : '//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min',
-        }
-      });
-      requirejs(['client', 'jquery', 'bootstrap'], function (client) {
-       
-          client().listUser ("/users")
-            .then(function(response){
-              var users = response.data;
-              for(var i in users) {
-                var user = users[i];
 
-                $('#users').append(
-                        $('<a>')
-                          .attr('href',user.href)
-                          .attr('class',"list-group-item")
-                          .append(user.name + " [" + user.id + "]")); 
-              }
-            });
-        });
-    </script>
+    </div>
+    
+
+   
+    <script type="text/babel" src="js/example.js"></script>
 
   </body>
 </html>

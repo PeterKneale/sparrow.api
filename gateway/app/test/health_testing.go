@@ -3,9 +3,9 @@ package test
 import (
 	"bytes"
 	"fmt"
+	"github.com/Simplicate/mango/gateway/temp/app"
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/goatest"
-	"github.com/simplicate/mango/gateway/temp/app"
 	"golang.org/x/net/context"
 	"io"
 	"log"

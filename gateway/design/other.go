@@ -4,37 +4,23 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var _ = Resource("web1", func() {
+var _ = Resource("web", func() {
 	Origin("*", func() {
 		Methods("GET", "OPTIONS")
 	})
-	Files("/web1", "web1/index.html")
+	Files("/web", "web/index.html")
 })
 
-var _ = Resource("web2", func() {
+var _ = Resource("js", func() {
 	Origin("*", func() {
 		Methods("GET", "OPTIONS")
 	})
-	Files("/web2", "web2/index.html")
-})
-
-var _ = Resource("js1", func() {
-	Origin("*", func() {
-		Methods("GET", "OPTIONS")
-	})
-	Files("/js1/*filepath", "web1/js1")
-})
-
-var _ = Resource("js2", func() {
-	Origin("*", func() {
-		Methods("GET", "OPTIONS")
-	})
-	Files("/js2/*filepath", "web2/js2")
+	Files("/js/*filepath", "web/js")
 })
 
 var _ = Resource("swagger", func() {
 	Origin("*", func() {
 		Methods("GET", "OPTIONS")
 	})
-	Files("/swagger.json", "web1/swagger/swagger.json")
+	Files("/swagger.json", "web/swagger/swagger.json")
 })
