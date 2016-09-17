@@ -1,1 +1,1 @@
-goagen app -d github.com/simplicate/mango/gateway/design
+goagen app -d github.com/simplicate/mango/gateway/design -o temp

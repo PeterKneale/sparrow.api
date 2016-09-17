@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/mango/gateway/design
-// --out=$(GOPATH)\src\github.com\Simplicate\Mango\gateway
+// --out=$(GOPATH)\src\github.com\Simplicate\Mango\gateway\temp
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -303,12 +303,18 @@ type SwaggerController interface {
 func MountSwaggerController(service *goa.Service, ctrl SwaggerController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/swagger.json", ctrl.MuxHandler("preflight", handleSwaggerOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/swagger/swagger.json", ctrl.MuxHandler("preflight", handleSwaggerOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/swagger/swagger.yaml", ctrl.MuxHandler("preflight", handleSwaggerOrigin(cors.HandlePreflight()), nil))
 
-	h = ctrl.FileHandler("/swagger.json", "web/swagger/swagger.json")
+	h = ctrl.FileHandler("/swagger/swagger.json", "web/swagger/swagger.json")
 	h = handleSwaggerOrigin(h)
-	service.Mux.Handle("GET", "/swagger.json", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Swagger", "files", "web/swagger/swagger.json", "route", "GET /swagger.json")
+	service.Mux.Handle("GET", "/swagger/swagger.json", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Swagger", "files", "web/swagger/swagger.json", "route", "GET /swagger/swagger.json")
+
+	h = ctrl.FileHandler("/swagger/swagger.yaml", "web/swagger/swagger.yaml")
+	h = handleSwaggerOrigin(h)
+	service.Mux.Handle("GET", "/swagger/swagger.yaml", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Swagger", "files", "web/swagger/swagger.yaml", "route", "GET /swagger/swagger.yaml")
 }
 
 // handleSwaggerOrigin applies the CORS response headers corresponding to the origin.

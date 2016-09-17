@@ -66,14 +66,16 @@ func getConnection() string {
 	port := getConfigValue("DB_PORT_5432_TCP_PORT", "5432")
 	sslmode := "disable"
 	connection := fmt.Sprintf("dbname=%s user=%s password=%s sslmode=%s port=%s host=%s", database, user, password, sslmode, port, host)
-	fmt.Sprintln(connection)
+	fmt.Printf("Connecting: %s", connection)
 	return connection
 }
 
 func getConfigValue(key string, defaultValue string) string {
 	var value, success = os.LookupEnv(key)
 	if !success {
+		fmt.Printf("Looking for: %s but not found. Using default value %s\n", key, defaultValue)
 		return defaultValue
 	}
+	fmt.Printf("Looking for: %s and found %s", key, defaultValue)
 	return value
 }

@@ -22,5 +22,6 @@ var _ = Resource("swagger", func() {
 	Origin("*", func() {
 		Methods("GET", "OPTIONS")
 	})
-	Files("/swagger.json", "web/swagger/swagger.json")
+	Files("/swagger/swagger.json", "web/swagger/swagger.json")
+	Files("/swagger/swagger.yaml", "web/swagger/swagger.yaml")
 })

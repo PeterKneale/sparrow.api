@@ -3,7 +3,7 @@ package test
 import (
 	"bytes"
 	"fmt"
-	"github.com/Simplicate/Mango/gateway/app"
+	"github.com/Simplicate/Mango/gateway/temp/app"
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/goatest"
 	"golang.org/x/net/context"
