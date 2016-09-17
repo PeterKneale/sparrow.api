@@ -14,3 +14,5 @@ web:
   target_num_containers: 2
 db:
   image: 'postgres:latest'
+  environment:
+    POSTGRES_PASSWORD: 'password123'

@@ -17,21 +17,17 @@ import (
 )
 
 func main() {
-
-	displayEnvironmentVariables()
-
 	var db *gorm.DB
 	var userdb *models.UserDataDB
 	var accountdb *models.AccountDataDB
-
 	var err error
-	url := fmt.Sprintf("dbname=postgres user=postgres password=password123 sslmode=disable port=%d host=%s", 5432, "postgres.33c58199.svc.dockerapp.io")
-	fmt.Println(url)
-	db, err = gorm.Open("postgres", url)
+
+	db, err = gorm.Open("postgres", getConnection())
 	if err != nil {
 		panic(err)
 	}
 	db.LogMode(true)
+	db.DB().SetMaxOpenConns(50)
 
 	//db.DropTable(&models.UserData{})
 	//db.DropTable(&models.AccountData{})
@@ -41,17 +37,14 @@ func main() {
 	userdb = models.NewUserDataDB(db)
 	accountdb = models.NewAccountDataDB(db)
 
-	db.DB().SetMaxOpenConns(50)
-
 	// Create service
 	service := goa.New("Public API")
-
-	// Mount middleware
 	service.Use(middleware.RequestID())
 	service.Use(middleware.LogRequest(true))
 	service.Use(middleware.ErrorHandler(service, true))
 	service.Use(middleware.Recover())
 
+	// Mount middleware
 	app.MountAccountController(service, controllers.NewAccountController(service, accountdb))
 	app.MountUserController(service, controllers.NewUserController(service, userdb))
 	app.MountHealthController(service, controllers.NewHealthController(service))
@@ -65,11 +58,22 @@ func main() {
 	}
 }
 
-func displayEnvironmentVariables() {
+func getConnection() string {
+	user := getConfigValue("DB_ENV_POSTGRES_USER", "postgres")
+	password := getConfigValue("DB_ENV_POSTGRES_PASSWORD", "password123")
+	database := getConfigValue("DB_ENV_POSTGRES_DB", "postgres")
+	host := getConfigValue("DB_PORT_5432_TCP_ADDR", "postgres.33c58199.svc.dockerapp.io")
+	port := getConfigValue("DB_PORT_5432_TCP_PORT", "5432")
+	sslmode := "disable"
+	connection := fmt.Sprintf("dbname=%s user=%s password=%s sslmode=%s port=%s host=%s", database, user, password, sslmode, port, host)
+	fmt.Sprintln(connection)
+	return connection
+}
 
-	fmt.Println("Environment variables:")
-	for _, e := range os.Environ() {
-		fmt.Println(e)
+func getConfigValue(key string, defaultValue string) string {
+	var value, success = os.LookupEnv(key)
+	if !success {
+		return defaultValue
 	}
-
+	return value
 }

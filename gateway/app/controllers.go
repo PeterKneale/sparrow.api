@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/mango/gateway/design
-// --out=$(GOPATH)\src\github.com\Simplicate\mango\gateway\temp
+// --out=$(GOPATH)\src\github.com\Simplicate\Mango\gateway
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -345,12 +345,12 @@ type WebController interface {
 func MountWebController(service *goa.Service, ctrl WebController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/web", ctrl.MuxHandler("preflight", handleWebOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/", ctrl.MuxHandler("preflight", handleWebOrigin(cors.HandlePreflight()), nil))
 
-	h = ctrl.FileHandler("/web", "web/index.html")
+	h = ctrl.FileHandler("/", "web/index.html")
 	h = handleWebOrigin(h)
-	service.Mux.Handle("GET", "/web", ctrl.MuxHandler("serve", h, nil))
-	service.LogInfo("mount", "ctrl", "Web", "files", "web/index.html", "route", "GET /web")
+	service.Mux.Handle("GET", "/", ctrl.MuxHandler("serve", h, nil))
+	service.LogInfo("mount", "ctrl", "Web", "files", "web/index.html", "route", "GET /")
 }
 
 // handleWebOrigin applies the CORS response headers corresponding to the origin.

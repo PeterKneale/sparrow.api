@@ -8,7 +8,7 @@ var _ = Resource("web", func() {
 	Origin("*", func() {
 		Methods("GET", "OPTIONS")
 	})
-	Files("/web", "web/index.html")
+	Files("/", "web/index.html")
 })
 
 var _ = Resource("js", func() {
