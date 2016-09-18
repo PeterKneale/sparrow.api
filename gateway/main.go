@@ -5,6 +5,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/simplicate/mango/gateway/app"
 	"github.com/simplicate/mango/gateway/controllers"
@@ -17,20 +18,11 @@ import (
 )
 
 func main() {
-	var db *gorm.DB
 	var userdb *models.UserDataDB
 	var accountdb *models.AccountDataDB
-	var err error
 
-	db, err = gorm.Open("postgres", getConnection())
-	if err != nil {
-		panic(err)
-	}
-	db.LogMode(true)
-	db.DB().SetMaxOpenConns(50)
+	db := getDatabase()
 
-	//db.DropTable(&models.UserData{})
-	//db.DropTable(&models.AccountData{})
 	db.AutoMigrate(&models.UserData{})
 	db.AutoMigrate(&models.AccountData{})
 
@@ -38,7 +30,7 @@ func main() {
 	accountdb = models.NewAccountDataDB(db)
 
 	// Create service
-	service := goa.New("Public API")
+	service := goa.New("Gateway API")
 	service.Use(middleware.RequestID())
 	service.Use(middleware.LogRequest(true))
 	service.Use(middleware.ErrorHandler(service, true))
@@ -58,24 +50,40 @@ func main() {
 	}
 }
 
+func getDatabase() *gorm.DB {
+	connection := getConnection()
+	for attempt := 0; attempt < 10; attempt++ {
+		fmt.Printf("Trying: %s. Attempt %d.\n", connection, attempt)
+		db, err := gorm.Open("postgres", connection)
+		if err == nil {
+			db.LogMode(true)
+			db.DB().SetMaxOpenConns(50)
+			return db
+		}
+		time.Sleep(2000 * time.Millisecond)
+	}
+	panic("Cannot connect to " + connection)
+}
+
 func getConnection() string {
-	user := getConfigValue("DB_ENV_POSTGRES_USER", "postgres")
-	password := getConfigValue("DB_ENV_POSTGRES_PASSWORD", "password123")
-	database := getConfigValue("DB_ENV_POSTGRES_DB", "postgres")
-	host := getConfigValue("DB_PORT_5432_TCP_ADDR", "postgres.33c58199.svc.dockerapp.io")
-	port := getConfigValue("DB_PORT_5432_TCP_PORT", "5432")
+
+	host := getEnv("DB_HOST")
+	database := getEnv("DB_DATABASE")
+	user := getEnv("DB_USER")
+	password := getEnv("DB_PASSWORD")
+	port := getEnv("DB_PORT")
 	sslmode := "disable"
+
 	connection := fmt.Sprintf("dbname=%s user=%s password=%s sslmode=%s port=%s host=%s", database, user, password, sslmode, port, host)
-	fmt.Printf("Connecting: %s", connection)
+	fmt.Printf("Connection: %s.\n", connection)
 	return connection
 }
 
-func getConfigValue(key string, defaultValue string) string {
+func getEnv(key string) string {
 	var value, success = os.LookupEnv(key)
 	if !success {
-		fmt.Printf("Looking for: %s but not found. Using default value %s\n", key, defaultValue)
-		return defaultValue
+		panic("Cannot find " + key + " in environment variables.\n")
 	}
-	fmt.Printf("Looking for: %s and found %s", key, defaultValue)
+	fmt.Printf("Looking for: %s and found %s.\n", key, value)
 	return value
 }

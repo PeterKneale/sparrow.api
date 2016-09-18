@@ -151,7 +151,7 @@ definitions:
         type: string
     title: 'Mediatype identifier: application/vnd.goa.error'
     type: object
-host: localhost:8080
+host: localhost
 info:
   description: Gateway API
   title: Gateway API
@@ -244,9 +244,9 @@ paths:
       schemes:
       - http
       summary: Download web/js
-  /swagger.json:
+  /swagger/swagger.json:
     get:
-      operationId: swagger#/swagger.json
+      operationId: swagger#/swagger/swagger.json
       responses:
         "200":
           description: File downloaded
@@ -255,6 +255,17 @@ paths:
       schemes:
       - http
       summary: Download web/swagger/swagger.json
+  /swagger/swagger.yaml:
+    get:
+      operationId: swagger#/swagger/swagger.yaml
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - http
+      summary: Download web/swagger/swagger.yaml
   /users:
     get:
       description: List users

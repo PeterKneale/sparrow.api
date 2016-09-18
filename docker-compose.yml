@@ -3,18 +3,48 @@ services:
   lb:
     image: 'dockercloud/haproxy:latest'
     links:
-      - api
+      - gateway1
+      - gateway2
     ports:
       - '80:80'
-      - '1936:1936'
-    
-  api:
-    image: 'peterkneale/mango:latest'
+      - '81:1936'
+    depends_on:
+      - gateway1
+      - gateway2
+    environment:
+      - ADDITIONAL_SERVICES=mango:gateway
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  gateway1:  
+    build: ./gateway/
     links:
       - db
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: "${DB_DATABASE}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
+      
+  gateway2:  
+    build: ./gateway/
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: "${DB_DATABASE}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
 
   db:
     image: 'postgres:latest'
     environment:
-      POSTGRES_PASSWORD: 'password123'
-
+      POSTGRES_DB: "${DB_DATABASE}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"

@@ -8,7 +8,7 @@ import (
 var _ = API("Gateway API", func() {
 	Title("Gateway API")
 	Description("Gateway API")
-	Host("localhost:8080")
+	Host("localhost")
 	Scheme("http")
 	Consumes("application/json")
 
