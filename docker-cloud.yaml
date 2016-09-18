@@ -1,23 +1,29 @@
+db:
+  environment:
+    - POSTGRES_DB=mangodb
+    - POSTGRES_PASSWORD=mangopassword
+    - POSTGRES_USER=mangouser
+  image: 'postgres:latest'
+  restart: always
 lb:
   image: 'dockercloud/haproxy:latest'
-  autorestart: always
   links:
     - web
   ports:
     - '80:80'
     - '1936:1936'
+  restart: always
   roles:
     - global
 web:
+  environment:
+    - DB_DATABASE=mangodb
+    - DB_HOST=10.7.0.6
+    - DB_PASSWORD=mangopassword
+    - DB_PORT=5432
+    - DB_USER=mangouser
   image: 'peterkneale/mango:latest'
-  autorestart: always
   links:
     - db
+  restart: always
   target_num_containers: 2
-db:
-  autorestart: always
-  environment:
-    - POSTGRES_USER=mangouser
-    - POSTGRES_DB=mangodb
-    - POSTGRES_PASSWORD=mangopassword
-  image: 'postgres:latest'
