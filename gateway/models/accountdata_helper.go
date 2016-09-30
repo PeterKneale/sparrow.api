@@ -3,7 +3,7 @@
 //
 // Generated with goagen v1.0.0, command line:
 // $ goagen
-// --design=github.com/simplicate/mango/gateway/design
+// --design=github.com/simplicate/sparrow.api/gateway/design
 // --out=C:\dev\go\src\github.com\simplicate\mango\gateway
 // --version=v1.0.0
 //
@@ -15,7 +15,7 @@ package models
 import (
 	"github.com/goadesign/goa"
 	"github.com/jinzhu/gorm"
-	"github.com/simplicate/mango/gateway/app"
+	"github.com/simplicate/sparrow.api/gateway/app"
 	"golang.org/x/net/context"
 	"time"
 )

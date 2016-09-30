@@ -7,9 +7,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/simplicate/mango/gateway/app"
-	"github.com/simplicate/mango/gateway/controllers"
-	"github.com/simplicate/mango/gateway/models"
+	"github.com/simplicate/sparrow.api/gateway/app"
+	"github.com/simplicate/sparrow.api/gateway/controllers"
+	"github.com/simplicate/sparrow.api/gateway/models"
 
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/middleware"
@@ -67,11 +67,11 @@ func getDatabase() *gorm.DB {
 
 func getConnection() string {
 
-	host := getEnv("DB_HOST")
-	database := getEnv("DB_DATABASE")
-	user := getEnv("DB_USER")
-	password := getEnv("DB_PASSWORD")
-	port := getEnv("DB_PORT")
+	host := "localhost"    // getEnv("DB_HOST")
+	database := "postgres" //getEnv("DB_DATABASE")
+	user := "postgres"     // getEnv("DB_USER")
+	password := "password" // getEnv("DB_PASSWORD")
+	port := "5432"         // getEnv("DB_PORT")
 	sslmode := "disable"
 
 	connection := fmt.Sprintf("dbname=%s user=%s password=%s sslmode=%s port=%s host=%s", database, user, password, sslmode, port, host)

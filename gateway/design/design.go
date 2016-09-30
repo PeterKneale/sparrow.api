@@ -11,7 +11,7 @@ var _ = API("Gateway API", func() {
 	Host("localhost")
 	Scheme("http")
 	Consumes("application/json")
-
+	Origin("*", func() { Methods("GET,POST,PUT,DELETE") })
 	ResponseTemplate(Created, func(pattern string) {
 		Description("Resource created")
 		Status(201)

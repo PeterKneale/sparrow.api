@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"github.com/goadesign/goa"
-	"github.com/simplicate/mango/gateway/app"
+	"github.com/simplicate/sparrow.api/gateway/app"
 )
 
 // HealthController implements the health resource.

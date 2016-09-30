@@ -3,8 +3,8 @@ package controllers
 import (
 	"github.com/goadesign/goa"
 	"github.com/jinzhu/gorm"
-	"github.com/simplicate/mango/gateway/app"
-	"github.com/simplicate/mango/gateway/models"
+	"github.com/simplicate/sparrow.api/gateway/app"
+	"github.com/simplicate/sparrow.api/gateway/models"
 )
 
 // AccountController implements the Account resource.

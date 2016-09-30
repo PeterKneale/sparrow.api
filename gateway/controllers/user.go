@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"fmt"
+	"time"
 
-	"github.com/simplicate/mango/gateway/app"
-	"github.com/simplicate/mango/gateway/models"
+	"github.com/simplicate/sparrow.api/gateway/app"
+	"github.com/simplicate/sparrow.api/gateway/models"
 
 	"github.com/goadesign/goa"
 	"github.com/jinzhu/gorm"
@@ -62,6 +63,8 @@ func (c *UserController) List(ctx *app.ListUserContext) error {
 	if err != nil {
 		return ErrDatabaseError(err)
 	}
+
+	time.Sleep(time.Second * 4)
 
 	mode := ctx.Params.Get("mode")
 	if mode == "tiny" {
