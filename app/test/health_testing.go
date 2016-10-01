@@ -39,7 +39,7 @@ func AliveHealthOK(t goatest.TInterface, ctx context.Context, service *goa.Servi
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/alive"),
+		Path: fmt.Sprintf("/api/alive"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
