@@ -69,7 +69,7 @@ docker logs api
 docker inspect api | grep IPAddress
 ```
 
-## TEST
+### Run Tests
 ```
 docker-machine ip dev
 curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/users
