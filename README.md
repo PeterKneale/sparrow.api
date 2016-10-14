@@ -1,12 +1,19 @@
 # Sparrow
 Sparrow Project
 
-## Generation options
-```
-goagen bootstrap -d github.com/simplicate/sparrow.api/design -o temp
-```
+## Executing via docker-compose
 
-## Run API against local DB
+### Setup environment and execute UP
+export DB_DATABASE=sparrowdatabase
+export DB_USER=sparrowuser
+export DB_PASSWORD=sparrowpassword
+export DB_PORT=5432
+
+docker-compose up
+
+## Executing LOCALLY
+
+### Run API against local DB
 ```
 export DB_HOST=localhost
 export DB_DATABASE=sparrow
@@ -45,7 +52,7 @@ docker logs db
 docker inspect db | grep IPAddress
 ```
 
-## Run API in docker
+### Run API in docker
 ```
 docker run --name api \
     -e DB_HOST=172.17.0.2 \
@@ -68,6 +75,11 @@ curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/swagger.json
 ```
 
 ## Other Commands
+
+### Generation of api and models
+```
+./generate.sh
+```
 
 ### Stop and remove all docker instances
 ```
