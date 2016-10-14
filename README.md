@@ -1,18 +1,21 @@
 # Sparrow
 Sparrow Project
 
-## Executing LOCALLY
-### Run API against local DB
+## RUNNING LOCALLY
+### Setup environment variables that point to a database
 ```
 export DB_HOST=localhost
 export DB_DATABASE=sparrow
 export DB_USER=postgres
 export DB_PASSWORD=password
 export DB_PORT=5432
+```
+### Run the API
+```
 ./sparrow.api.exe
 ```
 
-## SETUP DOCKER
+## RUNNING IN DOCKER
 
 ### Setup docker machine environment and update the shell to use it
 ```
