@@ -3,21 +3,21 @@ services:
   lb:
     image: 'dockercloud/haproxy:latest'
     links:
-      - gateway1
-      - gateway2
+      - api1
+      - api2
     ports:
-      - '80:80'
+      - '80:8080'
       - '81:1936'
     depends_on:
-      - gateway1
-      - gateway2
+      - api1
+      - api2
     environment:
-      - ADDITIONAL_SERVICES=mango:gateway
+      - ADDITIONAL_SERVICES=sparrow:api
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-  gateway1:  
-    build: ./gateway/
+  api1:  
+    image: sparrow_api
     links:
       - db
     depends_on:
@@ -29,8 +29,8 @@ services:
       DB_PASSWORD: "${DB_PASSWORD}"
       DB_PORT: "${DB_PORT}"
       
-  gateway2:  
-    build: ./gateway/
+  api2:  
+    image: sparrow_api
     links:
       - db
     depends_on:
