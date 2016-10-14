@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"fmt"
-	"time"
 
 	"github.com/simplicate/sparrow.api/app"
 	"github.com/simplicate/sparrow.api/models"
@@ -63,8 +62,6 @@ func (c *UserController) List(ctx *app.ListUserContext) error {
 	if err != nil {
 		return ErrDatabaseError(err)
 	}
-
-	time.Sleep(time.Second * 4)
 
 	mode := ctx.Params.Get("mode")
 	if mode == "tiny" {

@@ -5,9 +5,9 @@ import (
 	. "github.com/goadesign/goa/design/apidsl"
 )
 
-var _ = API("Gateway API", func() {
-	Title("Gateway API")
-	Description("Gateway API")
+var _ = API("Sparrow API", func() {
+	Title("Sparrow API")
+	Description("Sparrow API")
 	Host("localhost")
 	Scheme("http")
 	Consumes("application/json")
