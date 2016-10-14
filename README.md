@@ -1,11 +1,12 @@
-# Mango
-Mango Project
+# Sparrow
+Sparrow Project
 
 ## Generation options
 ```
 goagen bootstrap -d github.com/simplicate/sparrow.api/design -o temp
 ```
-## Run locally
+
+## Run API against local DB
 ```
 export DB_HOST=localhost
 export DB_DATABASE=sparrow
@@ -13,28 +14,38 @@ export DB_USER=postgres
 export DB_PASSWORD=password
 export DB_PORT=5432
 ./sparrow.api.exe
+```
+
+## Running in Docker
+
+### Setup docker machine environment and update the shell to use it
+```
+docker-machine create --driver virtualbox dev
+eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env dev) 
+docker-machine ip dev
 
 ```
-## Build docker
+
+### Build for linux
 ```
 env GOOS=linux GOARCH=386 go build
-docker build -t sparrow_api .
+docker build -t api .
 ```
 
-## Run DB
+### Run DB in docker
 ```
 docker run --name db \
     -e POSTGRES_DB=db \
     -e POSTGRES_USER=username \
     -e POSTGRES_PASSWORD=password \
+    -p 5432:5432 \
     -d postgres
 
 docker logs db
 docker inspect db | grep IPAddress
 ```
 
-
-## Run API
+## Run API in docker
 ```
 docker run --name api \
     -e DB_HOST=172.17.0.2 \
@@ -42,19 +53,14 @@ docker run --name api \
     -e DB_USER=username \
     -e DB_PASSWORD=password \
     -e DB_PORT=5432 \
-    -d sparrow_api 
+    -p 8080:8080 \
+    -d api 
 
 docker logs api
 docker inspect api | grep IPAddress
 ```
 
 ## Other Commands
-
-### Setup docker machine environment
-```
-docker-machine env
-eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env)
-```
 
 ### Stop and remove all docker instances
 ```
