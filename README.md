@@ -30,7 +30,7 @@ env GOOS=linux GOARCH=386 go build
 docker build -t api .
 ```
 
-## Executing via DOCKER-COMPOSE
+## EXECUTING VIA DOCKER-COMPOSE
 ### Setup environment and execute UP
 ```
 export DB_DATABASE=sparrow
