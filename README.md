@@ -15,7 +15,7 @@ export DB_PORT=5432
 ./sparrow.api.exe
 ```
 
-## RUNNING IN DOCKER
+## HOSTING IN DOCKER
 
 ### Setup docker machine environment and update the shell to use it
 ```
