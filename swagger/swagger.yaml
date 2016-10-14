@@ -4,11 +4,11 @@ definitions:
   Account:
     description: An account (default view)
     example:
-      name: boatgtp
+      name: t
     properties:
       name:
         description: Account name
-        example: boatgtp
+        example: t
         maxLength: 255
         minLength: 1
         type: string
@@ -18,14 +18,14 @@ definitions:
     type: object
   CreateUserPayload:
     example:
-      first_name: Rerum dicta suscipit vel nihil perferendis.
-      last_name: Eligendi quaerat.
+      first_name: Corrupti perspiciatis labore.
+      last_name: Dignissimos illo fugiat.
     properties:
       first_name:
-        example: Rerum dicta suscipit vel nihil perferendis.
+        example: Corrupti perspiciatis labore.
         type: string
       last_name:
-        example: Eligendi quaerat.
+        example: Dignissimos illo fugiat.
         type: string
     required:
     - first_name
@@ -34,38 +34,38 @@ definitions:
     type: object
   UpdateAccountPayload:
     example:
-      name: Praesentium quam.
+      name: Ratione nemo veritatis est.
     properties:
       name:
-        example: Praesentium quam.
+        example: Ratione nemo veritatis est.
         type: string
     title: UpdateAccountPayload
     type: object
   UpdateUserPayload:
     example:
-      first_name: Vel unde voluptas.
-      last_name: Molestiae laudantium.
+      first_name: Nemo est minus sit harum occaecati.
+      last_name: Non aut dolores inventore aliquam qui.
     properties:
       first_name:
-        example: Vel unde voluptas.
+        example: Nemo est minus sit harum occaecati.
         type: string
       last_name:
-        example: Molestiae laudantium.
+        example: Non aut dolores inventore aliquam qui.
         type: string
     title: UpdateUserPayload
     type: object
   User:
     description: A user (default view)
     example:
-      first_name: opl
+      first_name: bikzd4guzv
       href: /users/1
-      id: 8.35486e+18
-      last_name: ht9h4letlo
-      name: e6jr
+      id: 8.016644e+18
+      last_name: z21
+      name: f6opai
     properties:
       first_name:
         description: First name
-        example: opl
+        example: bikzd4guzv
         maxLength: 255
         minLength: 1
         type: string
@@ -75,18 +75,18 @@ definitions:
         type: string
       id:
         description: User id
-        example: 8.35486e+18
+        example: 8.016644e+18
         format: int64
         type: integer
       last_name:
         description: Last name
-        example: ht9h4letlo
+        example: z21
         maxLength: 255
         minLength: 1
         type: string
       name:
         description: name
-        example: e6jr
+        example: f6opai
         maxLength: 255
         minLength: 1
         type: string
@@ -100,16 +100,16 @@ definitions:
   UserCollection:
     description: UserCollection is the media type for an array of User (default view)
     example:
-    - first_name: opl
+    - first_name: bikzd4guzv
       href: /users/1
-      id: 8.35486e+18
-      last_name: ht9h4letlo
-      name: e6jr
-    - first_name: opl
+      id: 8.016644e+18
+      last_name: z21
+      name: f6opai
+    - first_name: bikzd4guzv
       href: /users/1
-      id: 8.35486e+18
-      last_name: ht9h4letlo
-      name: e6jr
+      id: 8.016644e+18
+      last_name: z21
+      name: f6opai
     items:
       $ref: '#/definitions/User'
     title: 'Mediatype identifier: application/vnd.user+json; type=collection'
@@ -153,21 +153,10 @@ definitions:
     type: object
 host: localhost
 info:
-  description: Gateway API
-  title: Gateway API
+  description: Sparrow API
+  title: Sparrow API
   version: ""
 paths:
-  /:
-    get:
-      operationId: web#/
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - http
-      summary: Download web/index.html
   /account:
     get:
       description: read current account
@@ -223,30 +212,9 @@ paths:
       summary: alive health
       tags:
       - health
-  /js/{filepath}:
+  /swagger.json:
     get:
-      operationId: js#/js/*filepath
-      parameters:
-      - description: Relative file path
-        in: path
-        name: filepath
-        required: true
-        type: string
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-        "404":
-          description: File not found
-          schema:
-            $ref: '#/definitions/error'
-      schemes:
-      - http
-      summary: Download web/js
-  /swagger/swagger.json:
-    get:
-      operationId: swagger#/swagger/swagger.json
+      operationId: swagger#/swagger.json
       responses:
         "200":
           description: File downloaded
@@ -254,10 +222,10 @@ paths:
             type: file
       schemes:
       - http
-      summary: Download web/swagger/swagger.json
-  /swagger/swagger.yaml:
+      summary: Download swagger/swagger.json
+  /swagger.yaml:
     get:
-      operationId: swagger#/swagger/swagger.yaml
+      operationId: swagger#/swagger.yaml
       responses:
         "200":
           description: File downloaded
@@ -265,7 +233,7 @@ paths:
             type: file
       schemes:
       - http
-      summary: Download web/swagger/swagger.yaml
+      summary: Download swagger/swagger.yaml
   /users:
     get:
       description: List users

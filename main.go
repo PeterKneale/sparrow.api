@@ -40,9 +40,7 @@ func main() {
 	app.MountAccountController(service, controllers.NewAccountController(service, accountdb))
 	app.MountUserController(service, controllers.NewUserController(service, userdb))
 	app.MountHealthController(service, controllers.NewHealthController(service))
-	app.MountJsController(service, controllers.NewJsController(service))
 	app.MountSwaggerController(service, controllers.NewSwaggerController(service))
-	app.MountWebController(service, controllers.NewWebController(service))
 
 	// Start service
 	if err := service.ListenAndServe("0.0.0.0:8080"); err != nil {

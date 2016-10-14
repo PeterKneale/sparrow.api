@@ -60,6 +60,13 @@ docker logs api
 docker inspect api | grep IPAddress
 ```
 
+## TEST
+```
+docker-machine ip dev
+curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/users
+curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/swagger.json
+```
+
 ## Other Commands
 
 ### Stop and remove all docker instances
