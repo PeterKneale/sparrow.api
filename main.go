@@ -4,24 +4,26 @@ package main
 
 import (
 	"fmt"
-	"os"
-	"time"
 
 	"github.com/simplicate/sparrow.api/app"
 	"github.com/simplicate/sparrow.api/controllers"
+	"github.com/simplicate/sparrow.api/inf/database"
+	"github.com/simplicate/sparrow.api/inf/env"
+	"github.com/simplicate/sparrow.api/inf/log"
 	"github.com/simplicate/sparrow.api/models"
 
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/middleware"
-	"github.com/jinzhu/gorm"
 	_ "github.com/lib/pq"
 )
 
 func main() {
+
+	log.Init()
 	var userdb *models.UserDataDB
 	var accountdb *models.AccountDataDB
 
-	db := getDatabase()
+	db := database.GetDatabase()
 
 	db.AutoMigrate(&models.UserData{})
 	db.AutoMigrate(&models.AccountData{})
@@ -30,7 +32,7 @@ func main() {
 	accountdb = models.NewAccountDataDB(db)
 
 	// Create service
-	service := goa.New("API")
+	service := goa.New("api")
 	service.Use(middleware.RequestID())
 	service.Use(middleware.LogRequest(true))
 	service.Use(middleware.ErrorHandler(service, true))
@@ -43,41 +45,10 @@ func main() {
 	app.MountSwaggerController(service, controllers.NewSwaggerController(service))
 
 	// Start service
-	if err := service.ListenAndServe("0.0.0.0:8080"); err != nil {
+	port := env.Get("API_PORT", "80")
+	address := fmt.Sprintf("0.0.0.0:%s", port)
+
+	if err := service.ListenAndServe(address); err != nil {
 		service.LogError("startup", "err", err)
 	}
-}
-
-func getDatabase() *gorm.DB {
-	connection := getConnection()
-	for attempt := 0; attempt < 10; attempt++ {
-		fmt.Printf("Trying: %s. Attempt %d.\n", connection, attempt)
-		db, err := gorm.Open("postgres", connection)
-		if err == nil {
-			db.LogMode(true)
-			db.DB().SetMaxOpenConns(50)
-			return db
-		}
-		time.Sleep(2000 * time.Millisecond)
-	}
-	panic("Cannot connect to " + connection)
-}
-
-func getConnection() string {
-	host := getEnv("DB_HOST")
-	database := getEnv("DB_DATABASE")
-	user := getEnv("DB_USER")
-	password := getEnv("DB_PASSWORD")
-	port := getEnv("DB_PORT")
-	sslmode := "disable"
-	return fmt.Sprintf("dbname=%s user=%s password=%s sslmode=%s port=%s host=%s", database, user, password, sslmode, port, host)
-}
-
-func getEnv(key string) string {
-	var value, success = os.LookupEnv(key)
-	if !success {
-		panic("Cannot find " + key + " in environment variables.\n")
-	}
-	fmt.Printf("Looking for: %s and found %s.\n", key, value)
-	return value
 }

@@ -11,8 +11,8 @@ ADD swagger/* /app/swagger/
 # Set the working directory to the app directory
 WORKDIR /app
 
-# Expose the application on port 8080.
-EXPOSE 8080
+# Expose the application on port 80.
+EXPOSE 80
 
 # Set the entry point of the container to the application executable
 ENTRYPOINT /app/sparrow.api

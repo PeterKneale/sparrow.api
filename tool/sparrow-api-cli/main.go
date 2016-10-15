@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	goaclient "github.com/goadesign/goa/client"
-	"github.com/simplicate/sparrow.api/scripts/_generated_/client"
-	"github.com/simplicate/sparrow.api/scripts/_generated_/tool/cli"
-	"github.com/spf13/cobra"
 	"net/http"
 	"os"
 	"time"
+
+	goaclient "github.com/goadesign/goa/client"
+	"github.com/simplicate/sparrow.api/client"
+	"github.com/simplicate/sparrow.api/tool/cli"
+	"github.com/spf13/cobra"
 )
 
 func main() {

@@ -3,14 +3,19 @@
     "isShellCommand": true,
     "showOutput": "silent",
     "command": "go",
-    "echoCommand": false,
-    "tasks": [{
-        "taskName": "build",
-        "args": [
-            "-x",
-            "-o",
-            "${workspaceRoot}.exe"
-        ],
-        "isBuildCommand": true
-    }]
+    "echoCommand": true,
+    "tasks": [
+        {
+            "taskName": "build",
+            "args": [
+                "-v"
+            ],
+            "isBuildCommand": true
+        },
+        {
+            "taskName": "test",
+            "args": [ "-v", "./..."],
+            "isTestCommand": true
+        }
+    ]
 }
