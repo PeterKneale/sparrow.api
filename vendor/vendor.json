@@ -1,0 +1,181 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "T9Zl3uf5X2xuv/13eGC6R1aqrAg=",
+			"path": "bitbucket.org/pkg/inflect",
+			"revision": "8961c3750a47",
+			"revisionTime": "2013-08-29T11:07:46Z"
+		},
+		{
+			"checksumSHA1": "d6798KSc0jDg2MHNxKdgyNfMK7A=",
+			"path": "github.com/armon/go-metrics",
+			"revision": "3df31a1ada83e310c2e24b267c8e8b68836547b4",
+			"revisionTime": "2016-07-17T04:34:58Z"
+		},
+		{
+			"checksumSHA1": "67Ufp7gCzJyjLVW3iW3og8uVtkw=",
+			"path": "github.com/dimfeld/httppath",
+			"revision": "c8e499c3ef3c3e272ed8bdcc1ccf39f73c88debc",
+			"revisionTime": "2014-05-15T16:47:37Z"
+		},
+		{
+			"checksumSHA1": "ruRok10rBvF72wI7xgibi16F91w=",
+			"path": "github.com/dimfeld/httptreemux",
+			"revision": "96acf0909c0b45ebf4a25a816cedc6d317e63679",
+			"revisionTime": "2016-09-14T05:32:48Z"
+		},
+		{
+			"checksumSHA1": "GP74sMBkU70PG1++wNeMHqFk/+w=",
+			"path": "github.com/goadesign/goa",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "Sf/0bt+aQfG4ng+Y061mu37KegI=",
+			"path": "github.com/goadesign/goa/cors",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "1JT6qYfrdFce7eNZ17OQYGia3XI=",
+			"path": "github.com/goadesign/goa/design",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "iLsvg+8i4Ikt+WDKk/yjU27zmf4=",
+			"path": "github.com/goadesign/goa/design/apidsl",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "FJv1gV2WiyoZ+lqyprF43ul2OtI=",
+			"path": "github.com/goadesign/goa/dslengine",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "ZWruR/dYS/tSyVoSuqFWHfgJG+A=",
+			"path": "github.com/goadesign/goa/goagen/codegen",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "GVW4KouC9RUAjuJeMGquFAOZkzI=",
+			"path": "github.com/goadesign/goa/goagen/utils",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "i5dwcaoGLDOQpIFmJMRiZN3GJsM=",
+			"path": "github.com/goadesign/goa/goatest",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "0B5a4Xd+r3nERnmvqBNnvtmEC00=",
+			"path": "github.com/goadesign/goa/middleware",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "zWFNNTZHErN63ltN+9xIqWPNYGY=",
+			"path": "github.com/goadesign/goa/uuid",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "Z59GVDWWqESly5kGREV5eK7HMwU=",
+			"path": "github.com/goadesign/goa/version",
+			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
+			"revisionTime": "2016-09-14T15:48:04Z"
+		},
+		{
+			"checksumSHA1": "jMUSlbULg+qTZKmq1Z82uKg+f40=",
+			"path": "github.com/goadesign/gorma",
+			"revision": "b2aaf14aeaf49c639740c129deb47d7b95aa14c3",
+			"revisionTime": "2016-08-10T18:52:50Z"
+		},
+		{
+			"checksumSHA1": "G2MHFmYcNnBGazYkYO+igegzeWY=",
+			"path": "github.com/goadesign/gorma/dsl",
+			"revision": "b2aaf14aeaf49c639740c129deb47d7b95aa14c3",
+			"revisionTime": "2016-08-10T18:52:50Z"
+		},
+		{
+			"checksumSHA1": "MduADU1i7GWAb03u8JmfYd4VDhc=",
+			"path": "github.com/jinzhu/gorm",
+			"revision": "041cd3dd31a68a3e9ad20fcddb46085df5aebc76",
+			"revisionTime": "2016-09-13T01:29:36Z"
+		},
+		{
+			"checksumSHA1": "ZtoqVjpOE8VF9n6Ebqyu4vTUYas=",
+			"path": "github.com/jinzhu/inflection",
+			"revision": "74387dc39a75e970e7a3ae6a3386b5bd2e5c5cff",
+			"revisionTime": "2016-08-17T01:46:01Z"
+		},
+		{
+			"checksumSHA1": "eOXF2PEvYLMeD8DSzLZJWbjYzco=",
+			"path": "github.com/kr/pretty",
+			"revision": "cfb55aafdaf3ec08f0db22699ab822c50091b1c4",
+			"revisionTime": "2016-08-23T17:07:15Z"
+		},
+		{
+			"checksumSHA1": "uulQHQ7IsRKqDudBC8Go9J0gtAc=",
+			"path": "github.com/kr/text",
+			"revision": "7cafcd837844e784b526369c9bce262804aebc60",
+			"revisionTime": "2016-05-04T02:26:26Z"
+		},
+		{
+			"checksumSHA1": "dNYxHiBLalTqluak2/Z8c3RsSEM=",
+			"path": "github.com/lib/pq",
+			"revision": "50761b0867bd1d9d069276790bcd4a3bccf2324a",
+			"revisionTime": "2016-08-31T22:25:20Z"
+		},
+		{
+			"checksumSHA1": "xppHi82MLqVx1eyQmbhTesAEjx8=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "50761b0867bd1d9d069276790bcd4a3bccf2324a",
+			"revisionTime": "2016-08-31T22:25:20Z"
+		},
+		{
+			"checksumSHA1": "L6Ps004WGoAJBEBX5Zrv0tPa2b4=",
+			"path": "github.com/manveru/faker",
+			"revision": "717f7cf83fb78669bfab612749c2e8ff63d5be11",
+			"revisionTime": "2016-04-19T07:20:36Z"
+		},
+		{
+			"checksumSHA1": "zmC8/3V4ls53DJlNTKDZwPSC/dA=",
+			"path": "github.com/satori/go.uuid",
+			"revision": "0aa62d5ddceb50dbcb909d790b5345affd3669b6",
+			"revisionTime": "2016-07-13T18:03:06Z"
+		},
+		{
+			"checksumSHA1": "J13En41R110Yo9yhJfrE5p39G7A=",
+			"path": "github.com/simplicate/sparrow.api/gateway/models",
+			"revision": "a8b4891e303efb9378859881e839a601284c8f89",
+			"revisionTime": "2016-10-01T10:41:34Z"
+		},
+		{
+			"checksumSHA1": "0Gpx49mdQXAyAQkFPePuDsRhESI=",
+			"path": "github.com/zach-klippenstein/goregen",
+			"revision": "795b5e3961ea1912fde60af417ad85e86acc0d6a",
+			"revisionTime": "2016-03-03T16:20:51Z"
+		},
+		{
+			"checksumSHA1": "9jjO5GjLa0XF/nfWihF02RoH4qc=",
+			"path": "golang.org/x/net/context",
+			"revision": "71a035914f99bb58fe82eac0f1289f10963d876c",
+			"revisionTime": "2016-09-12T21:59:12Z"
+		},
+		{
+			"checksumSHA1": "zxA5c9WSpUYfg2SCWX/GuRTuALE=",
+			"path": "golang.org/x/tools/go/ast/astutil",
+			"revision": "f1a397bba50dee815e8c73f3ec94ffc0e8df1a09",
+			"revisionTime": "2016-09-12T22:56:01Z"
+		}
+	],
+	"rootPath": "github.com/simplicate/sparrow.api"
+}
