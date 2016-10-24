@@ -33,9 +33,9 @@ docker build -t api .
 ### Run DB
 ```
 docker run --name db \
-    -e POSTGRES_DB=db \
-    -e POSTGRES_USER=username \
-    -e POSTGRES_PASSWORD=password \
+    -e DB_DATABASE=sparrowdb \
+    -e DB_USERNAME=sparrow \
+    -e DB_PASSWORD=password \
     -p 5432:5432 \
     -d postgres
 
@@ -46,12 +46,11 @@ docker inspect db | grep IPAddress
 ### Run API
 ```
 docker run --name api \
-    -e DB_HOST=172.17.0.2 \
-    -e DB_DATABASE=db \
-    -e DB_USER=username \
+    -e DB_DATABASE=sparrowdb \
+    -e DB_USERNAME=sparrow \
     -e DB_PASSWORD=password \
-    -e DB_PORT=5432 \
     -p 8080:8080 \
+    --link db:db
     -d api 
 
 docker logs api

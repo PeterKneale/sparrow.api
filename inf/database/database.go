@@ -33,11 +33,11 @@ func GetDatabase() *gorm.DB {
 }
 
 func getConnection() string {
-	host := env.Get("DB_HOST", "localhost")
-	database := env.Get("DB_DATABASE", "postgres")
-	user := env.Get("DB_USER", "postgres")
-	password := env.Get("DB_PASSWORD", "password")
-	port := env.Get("DB_PORT", "5432")
+	host := env.Get(env.ENV_DB_HOST, "localhost")
+	port := env.Get(env.ENV_DB_PORT, "5432")
+	database := env.Get(env.ENV_DB_DATABASE, "postgres")
+	user := env.Get(env.ENV_DB_USERNAME, "postgres")
+	password := env.Get(env.ENV_DB_PASSWORD, "password")
 	sslmode := "disable"
 
 	format := "dbname=%s user=%s password=%s sslmode=%s port=%s host=%s"

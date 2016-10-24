@@ -7,6 +7,12 @@ import (
 	"github.com/simplicate/sparrow.api/inf/log"
 )
 
+const ENV_DB_HOST string = "DB_PORT_6379_TCP_ADDR"
+const ENV_DB_PORT string = "DB_PORT_6379_TCP_PORT"
+const ENV_DB_DATABASE string = "DB_DATABASE"
+const ENV_DB_USERNAME string = "DB_USERNAME"
+const ENV_DB_PASSWORD string = "DB_PASSWORD"
+
 // Get config value from environment
 func Get(key string, defaultValue string) string {
 	var value, success = os.LookupEnv(key)
