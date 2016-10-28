@@ -8,8 +8,6 @@ goa is a framework for building microservices in Go using a unique design-first 
 [![Godoc](https://godoc.org/github.com/goadesign/goa?status.svg)](http://godoc.org/github.com/goadesign/goa)
 [![Slack](https://img.shields.io/badge/slack-gophers-orange.svg?style=flat)](https://gophers.slack.com/messages/goa/)
 
-### v1.0.0 released! Read the [blog post](https://goa.design/blog/hello-goa/)
-
 ## Why goa?
 
 There are a number of good Go packages for writing modular web services out there so why build
@@ -54,6 +52,18 @@ Assuming you have a working [Go](https://golang.org) setup:
 go get github.com/goadesign/goa
 go get github.com/goadesign/goa/goagen
 ```
+
+### Stable Versions
+
+goa follows [Semantic Versioning](http://semver.org/) which is a fancy way of saying it publishes
+releases with version numbers of the form `vX.Y.Z` and makes sure that your code can upgrade to new
+versions with the same `X` component without having to make changes.
+
+Releases are tagged with the corresponding version number. There is also a branch for each major
+version (only `v1` at the moment). The recommended practice is to vendor the stable branch.
+
+Current Release: `v1.0.0`
+Stable Branch: `v1`
 
 ## Teaser
 
@@ -115,7 +125,7 @@ This produces the following outputs:
 
 First let's implement the API - edit the file `operands.go` and replace the content of the `Add`
 function with:
-```
+```go
 // Add import for strconv
 import "strconv"
 

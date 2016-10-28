@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/sparrow.api/design
-// --out=$(GOPATH)\src\github.com\Simplicate\sparrow.api\
+// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\design\_temp_
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -23,8 +23,6 @@ import (
 func initService(service *goa.Service) {
 	// Setup encoders and decoders
 	service.Encoder.Register(goa.NewJSONEncoder, "application/json")
-	service.Encoder.Register(goa.NewGobEncoder, "application/gob", "application/x-gob")
-	service.Encoder.Register(goa.NewXMLEncoder, "application/xml")
 	service.Decoder.Register(goa.NewJSONDecoder, "application/json")
 
 	// Setup default encoder and decoder
@@ -99,7 +97,7 @@ func handleAccountOrigin(h goa.Handler) goa.Handler {
 			rw.Header().Set("Access-Control-Allow-Credentials", "false")
 			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
 				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE")
+				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
 			}
 			return h(ctx, rw, req)
 		}
@@ -243,7 +241,7 @@ func handleUserOrigin(h goa.Handler) goa.Handler {
 			rw.Header().Set("Access-Control-Allow-Credentials", "false")
 			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
 				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE")
+				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
 			}
 			return h(ctx, rw, req)
 		}
@@ -277,17 +275,21 @@ func unmarshalUpdateUserPayload(ctx context.Context, service *goa.Service, req *
 	return nil
 }
 
-// HealthController is the controller interface for the Health actions.
-type HealthController interface {
+// MetaController is the controller interface for the Meta actions.
+type MetaController interface {
 	goa.Muxer
-	Alive(*AliveHealthContext) error
+	Alive(*AliveMetaContext) error
+	Ready(*ReadyMetaContext) error
+	Root(*RootMetaContext) error
 }
 
-// MountHealthController "mounts" a Health resource controller on the given service.
-func MountHealthController(service *goa.Service, ctrl HealthController) {
+// MountMetaController "mounts" a Meta resource controller on the given service.
+func MountMetaController(service *goa.Service, ctrl MetaController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/api/alive", ctrl.MuxHandler("preflight", handleHealthOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/api/health/alive", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/api/health/ready", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/api", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -295,19 +297,51 @@ func MountHealthController(service *goa.Service, ctrl HealthController) {
 			return err
 		}
 		// Build the context
-		rctx, err := NewAliveHealthContext(ctx, service)
+		rctx, err := NewAliveMetaContext(ctx, service)
 		if err != nil {
 			return err
 		}
 		return ctrl.Alive(rctx)
 	}
-	h = handleHealthOrigin(h)
-	service.Mux.Handle("GET", "/api/alive", ctrl.MuxHandler("Alive", h, nil))
-	service.LogInfo("mount", "ctrl", "Health", "action", "Alive", "route", "GET /api/alive")
+	h = handleMetaOrigin(h)
+	service.Mux.Handle("GET", "/api/health/alive", ctrl.MuxHandler("Alive", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Alive", "route", "GET /api/health/alive")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewReadyMetaContext(ctx, service)
+		if err != nil {
+			return err
+		}
+		return ctrl.Ready(rctx)
+	}
+	h = handleMetaOrigin(h)
+	service.Mux.Handle("GET", "/api/health/ready", ctrl.MuxHandler("Ready", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Ready", "route", "GET /api/health/ready")
+
+	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
+		// Check if there was an error loading the request
+		if err := goa.ContextError(ctx); err != nil {
+			return err
+		}
+		// Build the context
+		rctx, err := NewRootMetaContext(ctx, service)
+		if err != nil {
+			return err
+		}
+		return ctrl.Root(rctx)
+	}
+	h = handleMetaOrigin(h)
+	service.Mux.Handle("GET", "/api", ctrl.MuxHandler("Root", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Root", "route", "GET /api")
 }
 
-// handleHealthOrigin applies the CORS response headers corresponding to the origin.
-func handleHealthOrigin(h goa.Handler) goa.Handler {
+// handleMetaOrigin applies the CORS response headers corresponding to the origin.
+func handleMetaOrigin(h goa.Handler) goa.Handler {
 
 	return func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		origin := req.Header.Get("Origin")
@@ -321,7 +355,7 @@ func handleHealthOrigin(h goa.Handler) goa.Handler {
 			rw.Header().Set("Access-Control-Allow-Credentials", "false")
 			if acrm := req.Header.Get("Access-Control-Request-Method"); acrm != "" {
 				// We are handling a preflight request
-				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE")
+				rw.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS")
 			}
 			return h(ctx, rw, req)
 		}

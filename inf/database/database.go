@@ -14,7 +14,7 @@ func GetDatabase() *gorm.DB {
 	connection := getConnection()
 	for attempt := 0; attempt < 10; attempt++ {
 
-		log.Debug(log.INF_DATABASE, log.ACTION_DATABASE_CONNECT, "connecting to database")
+		log.Debug("connecting to database")
 
 		db, err := gorm.Open("postgres", connection)
 
@@ -24,11 +24,11 @@ func GetDatabase() *gorm.DB {
 			return db
 		}
 
-		log.Warn(log.INF_DATABASE, log.ACTION_DATABASE_CONNECT, "failed to connect to database")
+		log.Warn("failed to connect to database")
 
 		time.Sleep(2000 * time.Millisecond)
 	}
-	log.Fatal(log.INF_DATABASE, log.ACTION_DATABASE_CONNECT, "failed to connect to database")
+	log.Fatal("failed to connect to database")
 	panic("failed to connect:" + connection)
 }
 
@@ -44,7 +44,6 @@ func getConnection() string {
 	connection := fmt.Sprintf(format, database, user, password, sslmode, port, host)
 	connectionAnon := fmt.Sprintf(format, database, user, "xxxxxxxxx", sslmode, port, host)
 
-	msg := fmt.Sprintf("database connection: %s", connectionAnon)
-	log.Info(log.ACTION_API_HOST, log.ACTION_HOST_CONFIGURE, msg)
+	log.Info(fmt.Sprintf("db connection: %s", connectionAnon))
 	return connection
 }

@@ -22,8 +22,6 @@ func New(c goaclient.Doer) *Client {
 
 	// Setup encoders and decoders
 	client.Encoder.Register(goa.NewJSONEncoder, "application/json")
-	client.Encoder.Register(goa.NewGobEncoder, "application/gob", "application/x-gob")
-	client.Encoder.Register(goa.NewXMLEncoder, "application/xml")
 	client.Decoder.Register(goa.NewJSONDecoder, "application/json")
 
 	// Setup default encoder and decoder

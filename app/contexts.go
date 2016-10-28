@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/sparrow.api/design
-// --out=$(GOPATH)\src\github.com\Simplicate\sparrow.api\
+// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\design\_temp_
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -13,10 +13,9 @@
 package app
 
 import (
-	"strconv"
-
 	"github.com/goadesign/goa"
 	"golang.org/x/net/context"
+	"strconv"
 )
 
 // ReadAccountContext provides the Account read action context.
@@ -190,12 +189,18 @@ func NewListUserContext(ctx context.Context, service *goa.Service) (*ListUserCon
 // OK sends a HTTP response with status code 200.
 func (ctx *ListUserContext) OK(r UserCollection) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.user+json; type=collection")
+	if r == nil {
+		r = UserCollection{}
+	}
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
 // OKTiny sends a HTTP response with status code 200.
 func (ctx *ListUserContext) OKTiny(r UserTinyCollection) error {
 	ctx.ResponseData.Header().Set("Content-Type", "application/vnd.user+json; type=collection")
+	if r == nil {
+		r = UserTinyCollection{}
+	}
 	return ctx.ResponseData.Service.Send(ctx.Context, 200, r)
 }
 
@@ -310,26 +315,78 @@ func (ctx *UpdateUserContext) NotFound() error {
 	return nil
 }
 
-// AliveHealthContext provides the health alive action context.
-type AliveHealthContext struct {
+// AliveMetaContext provides the meta alive action context.
+type AliveMetaContext struct {
 	context.Context
 	*goa.ResponseData
 	*goa.RequestData
 }
 
-// NewAliveHealthContext parses the incoming request URL and body, performs validations and creates the
-// context used by the health controller alive action.
-func NewAliveHealthContext(ctx context.Context, service *goa.Service) (*AliveHealthContext, error) {
+// NewAliveMetaContext parses the incoming request URL and body, performs validations and creates the
+// context used by the meta controller alive action.
+func NewAliveMetaContext(ctx context.Context, service *goa.Service) (*AliveMetaContext, error) {
 	var err error
 	resp := goa.ContextResponse(ctx)
 	resp.Service = service
 	req := goa.ContextRequest(ctx)
-	rctx := AliveHealthContext{Context: ctx, ResponseData: resp, RequestData: req}
+	rctx := AliveMetaContext{Context: ctx, ResponseData: resp, RequestData: req}
 	return &rctx, err
 }
 
 // OK sends a HTTP response with status code 200.
-func (ctx *AliveHealthContext) OK(resp []byte) error {
+func (ctx *AliveMetaContext) OK(resp []byte) error {
+	ctx.ResponseData.Header().Set("Content-Type", "text/plain")
+	ctx.ResponseData.WriteHeader(200)
+	_, err := ctx.ResponseData.Write(resp)
+	return err
+}
+
+// ReadyMetaContext provides the meta ready action context.
+type ReadyMetaContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+}
+
+// NewReadyMetaContext parses the incoming request URL and body, performs validations and creates the
+// context used by the meta controller ready action.
+func NewReadyMetaContext(ctx context.Context, service *goa.Service) (*ReadyMetaContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	rctx := ReadyMetaContext{Context: ctx, ResponseData: resp, RequestData: req}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *ReadyMetaContext) OK(resp []byte) error {
+	ctx.ResponseData.Header().Set("Content-Type", "text/plain")
+	ctx.ResponseData.WriteHeader(200)
+	_, err := ctx.ResponseData.Write(resp)
+	return err
+}
+
+// RootMetaContext provides the meta root action context.
+type RootMetaContext struct {
+	context.Context
+	*goa.ResponseData
+	*goa.RequestData
+}
+
+// NewRootMetaContext parses the incoming request URL and body, performs validations and creates the
+// context used by the meta controller root action.
+func NewRootMetaContext(ctx context.Context, service *goa.Service) (*RootMetaContext, error) {
+	var err error
+	resp := goa.ContextResponse(ctx)
+	resp.Service = service
+	req := goa.ContextRequest(ctx)
+	rctx := RootMetaContext{Context: ctx, ResponseData: resp, RequestData: req}
+	return &rctx, err
+}
+
+// OK sends a HTTP response with status code 200.
+func (ctx *RootMetaContext) OK(resp []byte) error {
 	ctx.ResponseData.Header().Set("Content-Type", "text/plain")
 	ctx.ResponseData.WriteHeader(200)
 	_, err := ctx.ResponseData.Write(resp)

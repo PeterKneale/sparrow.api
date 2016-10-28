@@ -6,7 +6,7 @@ import (
 	"github.com/goadesign/goa"
 	goaclient "github.com/goadesign/goa/client"
 	uuid "github.com/goadesign/goa/uuid"
-	"github.com/simplicate/sparrow.api/client"
+	"github.com/simplicate/sparrow.api/design/_temp_/client"
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"
 	"log"
@@ -64,8 +64,18 @@ type (
 		PrettyPrint bool
 	}
 
-	// AliveHealthCommand is the command line data structure for the alive action of health
-	AliveHealthCommand struct {
+	// AliveMetaCommand is the command line data structure for the alive action of meta
+	AliveMetaCommand struct {
+		PrettyPrint bool
+	}
+
+	// ReadyMetaCommand is the command line data structure for the ready action of meta
+	ReadyMetaCommand struct {
+		PrettyPrint bool
+	}
+
+	// RootMetaCommand is the command line data structure for the root action of meta
+	RootMetaCommand struct {
 		PrettyPrint bool
 	}
 
@@ -81,11 +91,11 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	var command, sub *cobra.Command
 	command = &cobra.Command{
 		Use:   "alive",
-		Short: `Perform health check.`,
+		Short: `Perform aliveness check.`,
 	}
-	tmp1 := new(AliveHealthCommand)
+	tmp1 := new(AliveMetaCommand)
 	sub = &cobra.Command{
-		Use:   `health ["/alive"]`,
+		Use:   `meta ["/api/health/alive"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp1.Run(c, args) },
 	}
@@ -99,7 +109,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(CreateUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/users"]`,
+		Use:   `User ["/api/users"]`,
 		Short: ``,
 		Long: `
 
@@ -121,7 +131,7 @@ Payload example:
 	}
 	tmp3 := new(DeleteUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/users/ID"]`,
+		Use:   `User ["/api/users/ID"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp3.Run(c, args) },
 	}
@@ -135,7 +145,7 @@ Payload example:
 	}
 	tmp4 := new(ListUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/users"]`,
+		Use:   `User ["/api/users"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp4.Run(c, args) },
 	}
@@ -149,7 +159,7 @@ Payload example:
 	}
 	tmp5 := new(ReadAccountCommand)
 	sub = &cobra.Command{
-		Use:   `Account ["/account"]`,
+		Use:   `Account ["/api/account"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp5.Run(c, args) },
 	}
@@ -158,7 +168,7 @@ Payload example:
 	command.AddCommand(sub)
 	tmp6 := new(ReadUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/users/ID"]`,
+		Use:   `User ["/api/users/ID"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp6.Run(c, args) },
 	}
@@ -167,12 +177,40 @@ Payload example:
 	command.AddCommand(sub)
 	app.AddCommand(command)
 	command = &cobra.Command{
+		Use:   "ready",
+		Short: `Perform readiness check.`,
+	}
+	tmp7 := new(ReadyMetaCommand)
+	sub = &cobra.Command{
+		Use:   `meta ["/api/health/ready"]`,
+		Short: ``,
+		RunE:  func(cmd *cobra.Command, args []string) error { return tmp7.Run(c, args) },
+	}
+	tmp7.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp7.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
+		Use:   "root",
+		Short: `Perform root check.`,
+	}
+	tmp8 := new(RootMetaCommand)
+	sub = &cobra.Command{
+		Use:   `meta ["/api"]`,
+		Short: ``,
+		RunE:  func(cmd *cobra.Command, args []string) error { return tmp8.Run(c, args) },
+	}
+	tmp8.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp8.PrettyPrint, "pp", false, "Pretty print response body")
+	command.AddCommand(sub)
+	app.AddCommand(command)
+	command = &cobra.Command{
 		Use:   "update",
 		Short: `update action`,
 	}
-	tmp7 := new(UpdateAccountCommand)
+	tmp9 := new(UpdateAccountCommand)
 	sub = &cobra.Command{
-		Use:   `Account ["/account"]`,
+		Use:   `Account ["/api/account"]`,
 		Short: ``,
 		Long: `
 
@@ -181,14 +219,14 @@ Payload example:
 {
    "name": "Ratione nemo veritatis est."
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp7.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp9.Run(c, args) },
 	}
-	tmp7.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp7.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp9.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp9.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
-	tmp8 := new(UpdateUserCommand)
+	tmp10 := new(UpdateUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/users/ID"]`,
+		Use:   `User ["/api/users/ID"]`,
 		Short: ``,
 		Long: `
 
@@ -198,10 +236,10 @@ Payload example:
    "first_name": "Nemo est minus sit harum occaecati.",
    "last_name": "Non aut dolores inventore aliquam qui."
 }`,
-		RunE: func(cmd *cobra.Command, args []string) error { return tmp8.Run(c, args) },
+		RunE: func(cmd *cobra.Command, args []string) error { return tmp10.Run(c, args) },
 	}
-	tmp8.RegisterFlags(sub, c)
-	sub.PersistentFlags().BoolVar(&tmp8.PrettyPrint, "pp", false, "Pretty print response body")
+	tmp10.RegisterFlags(sub, c)
+	sub.PersistentFlags().BoolVar(&tmp10.PrettyPrint, "pp", false, "Pretty print response body")
 	command.AddCommand(sub)
 	app.AddCommand(command)
 
@@ -422,7 +460,7 @@ func (cmd *ReadAccountCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/account"
+		path = "/api/account"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -446,7 +484,7 @@ func (cmd *UpdateAccountCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/account"
+		path = "/api/account"
 	}
 	var payload client.UpdateAccountPayload
 	if cmd.Payload != "" {
@@ -479,7 +517,7 @@ func (cmd *CreateUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/users"
+		path = "/api/users"
 	}
 	var payload client.CreateUserPayload
 	if cmd.Payload != "" {
@@ -512,7 +550,7 @@ func (cmd *DeleteUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/users/%v", cmd.ID)
+		path = fmt.Sprintf("/api/users/%v", cmd.ID)
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -538,7 +576,7 @@ func (cmd *ListUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/users"
+		path = "/api/users"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -562,7 +600,7 @@ func (cmd *ReadUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/users/%v", cmd.ID)
+		path = fmt.Sprintf("/api/users/%v", cmd.ID)
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -588,7 +626,7 @@ func (cmd *UpdateUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/users/%v", cmd.ID)
+		path = fmt.Sprintf("/api/users/%v", cmd.ID)
 	}
 	var payload client.UpdateUserPayload
 	if cmd.Payload != "" {
@@ -617,17 +655,17 @@ func (cmd *UpdateUserCommand) RegisterFlags(cc *cobra.Command, c *client.Client)
 	cc.Flags().IntVar(&cmd.ID, "id", id, `User id`)
 }
 
-// Run makes the HTTP request corresponding to the AliveHealthCommand command.
-func (cmd *AliveHealthCommand) Run(c *client.Client, args []string) error {
+// Run makes the HTTP request corresponding to the AliveMetaCommand command.
+func (cmd *AliveMetaCommand) Run(c *client.Client, args []string) error {
 	var path string
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/alive"
+		path = "/api/health/alive"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
-	resp, err := c.AliveHealth(ctx, path)
+	resp, err := c.AliveMeta(ctx, path)
 	if err != nil {
 		goa.LogError(ctx, "failed", "err", err)
 		return err
@@ -638,5 +676,53 @@ func (cmd *AliveHealthCommand) Run(c *client.Client, args []string) error {
 }
 
 // RegisterFlags registers the command flags with the command line.
-func (cmd *AliveHealthCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+func (cmd *AliveMetaCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+}
+
+// Run makes the HTTP request corresponding to the ReadyMetaCommand command.
+func (cmd *ReadyMetaCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = "/api/health/ready"
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.ReadyMeta(ctx, path)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *ReadyMetaCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
+}
+
+// Run makes the HTTP request corresponding to the RootMetaCommand command.
+func (cmd *RootMetaCommand) Run(c *client.Client, args []string) error {
+	var path string
+	if len(args) > 0 {
+		path = args[0]
+	} else {
+		path = "/api"
+	}
+	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
+	ctx := goa.WithLogger(context.Background(), logger)
+	resp, err := c.RootMeta(ctx, path)
+	if err != nil {
+		goa.LogError(ctx, "failed", "err", err)
+		return err
+	}
+
+	goaclient.HandleResponse(c.Client, resp, cmd.PrettyPrint)
+	return nil
+}
+
+// RegisterFlags registers the command flags with the command line.
+func (cmd *RootMetaCommand) RegisterFlags(cc *cobra.Command, c *client.Client) {
 }

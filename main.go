@@ -41,12 +41,12 @@ func main() {
 	// Mount middleware
 	app.MountAccountController(service, controllers.NewAccountController(service, accountdb))
 	app.MountUserController(service, controllers.NewUserController(service, userdb))
-	app.MountHealthController(service, controllers.NewHealthController(service))
+	app.MountMetaController(service, controllers.NewMetaController(service, userdb, accountdb))
 	app.MountSwaggerController(service, controllers.NewSwaggerController(service))
 
 	// Start service
 	port := env.Get("API_PORT", "80")
-	address := fmt.Sprintf("0.0.0.0:%s", port)
+	address := fmt.Sprintf(":%s", port)
 
 	if err := service.ListenAndServe(address); err != nil {
 		service.LogError("startup", "err", err)

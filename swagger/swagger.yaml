@@ -151,13 +151,25 @@ definitions:
         type: string
     title: 'Mediatype identifier: application/vnd.goa.error'
     type: object
-host: localhost
+host: webapitester.com
 info:
   description: Sparrow API
   title: Sparrow API
   version: ""
 paths:
-  /account:
+  /api:
+    get:
+      description: Perform root check.
+      operationId: meta#root
+      responses:
+        "200":
+          description: OK
+      schemes:
+      - http
+      summary: root meta
+      tags:
+      - meta
+  /api/account:
     get:
       description: read current account
       operationId: Account#read
@@ -200,41 +212,31 @@ paths:
       summary: update Account
       tags:
       - Account
-  /alive:
+  /api/health/alive:
     get:
-      description: Perform health check.
-      operationId: health#alive
+      description: Perform aliveness check.
+      operationId: meta#alive
       responses:
         "200":
           description: OK
       schemes:
       - http
-      summary: alive health
+      summary: alive meta
       tags:
-      - health
-  /swagger.json:
+      - meta
+  /api/health/ready:
     get:
-      operationId: swagger#/swagger.json
+      description: Perform readiness check.
+      operationId: meta#ready
       responses:
         "200":
-          description: File downloaded
-          schema:
-            type: file
+          description: OK
       schemes:
       - http
-      summary: Download swagger/swagger.json
-  /swagger.yaml:
-    get:
-      operationId: swagger#/swagger.yaml
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - http
-      summary: Download swagger/swagger.yaml
-  /users:
+      summary: ready meta
+      tags:
+      - meta
+  /api/users:
     get:
       description: List users
       operationId: User#list
@@ -278,7 +280,7 @@ paths:
       summary: create User
       tags:
       - User
-  /users/{id}:
+  /api/users/{id}:
     delete:
       operationId: User#delete
       parameters:
@@ -354,11 +356,30 @@ paths:
       summary: update User
       tags:
       - User
+  /swagger.json:
+    get:
+      operationId: swagger#/swagger.json
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - http
+      summary: Download swagger/swagger.json
+  /swagger.yaml:
+    get:
+      operationId: swagger#/swagger.yaml
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - http
+      summary: Download swagger/swagger.yaml
 produces:
 - application/json
-- application/xml
-- application/gob
-- application/x-gob
 responses:
   NoContent:
     description: No Content

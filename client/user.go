@@ -10,7 +10,7 @@ import (
 
 // CreateUserPath computes a request path to the create action of User.
 func CreateUserPath() string {
-	return fmt.Sprintf("/users")
+	return fmt.Sprintf("/api/users")
 }
 
 // Create new user
@@ -50,7 +50,7 @@ func (c *Client) NewCreateUserRequest(ctx context.Context, path string, payload 
 
 // DeleteUserPath computes a request path to the delete action of User.
 func DeleteUserPath(id int) string {
-	return fmt.Sprintf("/users/%v", id)
+	return fmt.Sprintf("/api/users/%v", id)
 }
 
 // DeleteUser makes a request to the delete action endpoint of the User resource
@@ -78,7 +78,7 @@ func (c *Client) NewDeleteUserRequest(ctx context.Context, path string) (*http.R
 
 // ListUserPath computes a request path to the list action of User.
 func ListUserPath() string {
-	return fmt.Sprintf("/users")
+	return fmt.Sprintf("/api/users")
 }
 
 // List users
@@ -106,7 +106,7 @@ func (c *Client) NewListUserRequest(ctx context.Context, path string) (*http.Req
 
 // ReadUserPath computes a request path to the read action of User.
 func ReadUserPath(id int) string {
-	return fmt.Sprintf("/users/%v", id)
+	return fmt.Sprintf("/api/users/%v", id)
 }
 
 // read user
@@ -134,7 +134,7 @@ func (c *Client) NewReadUserRequest(ctx context.Context, path string) (*http.Req
 
 // UpdateUserPath computes a request path to the update action of User.
 func UpdateUserPath(id int) string {
-	return fmt.Sprintf("/users/%v", id)
+	return fmt.Sprintf("/api/users/%v", id)
 }
 
 // Update user

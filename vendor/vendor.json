@@ -33,76 +33,76 @@
 			"revisionTime": "2016-09-14T05:32:48Z"
 		},
 		{
-			"checksumSHA1": "GP74sMBkU70PG1++wNeMHqFk/+w=",
+			"checksumSHA1": "oL6vp5Tuud2e1Z+nrSdHHlHIIw8=",
 			"path": "github.com/goadesign/goa",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "0jXrd/01VBWOW+DEcCiMScaBrPM=",
 			"path": "github.com/goadesign/goa/client",
-			"revision": "5ce539cff30eb8d085db650e429f6bb4ac2c22f7",
-			"revisionTime": "2016-10-26T14:35:51Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "Sf/0bt+aQfG4ng+Y061mu37KegI=",
 			"path": "github.com/goadesign/goa/cors",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
-			"checksumSHA1": "1JT6qYfrdFce7eNZ17OQYGia3XI=",
+			"checksumSHA1": "8BHnCOQbyM1sBjNFTuieKjEB9jw=",
 			"path": "github.com/goadesign/goa/design",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
-			"checksumSHA1": "iLsvg+8i4Ikt+WDKk/yjU27zmf4=",
+			"checksumSHA1": "yJuPXeuqDO1i/jICLiBARRmuY7Y=",
 			"path": "github.com/goadesign/goa/design/apidsl",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "FJv1gV2WiyoZ+lqyprF43ul2OtI=",
 			"path": "github.com/goadesign/goa/dslengine",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "ZWruR/dYS/tSyVoSuqFWHfgJG+A=",
 			"path": "github.com/goadesign/goa/goagen/codegen",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "GVW4KouC9RUAjuJeMGquFAOZkzI=",
 			"path": "github.com/goadesign/goa/goagen/utils",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "i5dwcaoGLDOQpIFmJMRiZN3GJsM=",
 			"path": "github.com/goadesign/goa/goatest",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
-			"checksumSHA1": "0B5a4Xd+r3nERnmvqBNnvtmEC00=",
+			"checksumSHA1": "jMY8A2WYsyCjhBXJQO0hVLBCEP4=",
 			"path": "github.com/goadesign/goa/middleware",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "zWFNNTZHErN63ltN+9xIqWPNYGY=",
 			"path": "github.com/goadesign/goa/uuid",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "Z59GVDWWqESly5kGREV5eK7HMwU=",
 			"path": "github.com/goadesign/goa/version",
-			"revision": "cc5bbe2117597af03b9f1ce7bd5a901a36fb74d0",
-			"revisionTime": "2016-09-14T15:48:04Z"
+			"revision": "78c9c612c38c308793ec1f2cf310025f140755b3",
+			"revisionTime": "2016-10-28T00:35:18Z"
 		},
 		{
 			"checksumSHA1": "jMUSlbULg+qTZKmq1Z82uKg+f40=",

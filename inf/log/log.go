@@ -19,47 +19,33 @@ func Init() {
 }
 
 // Debug level logging
-func Debug(inf, action, message string) {
+func Debug(message string) {
 	logrus.WithFields(logrus.Fields{
-		"app":    "api",
-		"inf":    inf,
-		"action": action,
+		"app":       "sparrow",
+		"component": "api",
 	}).Debug(message)
 }
 
 // Info level logging
-func Info(inf, action, message string) {
+func Info(message string) {
 	logrus.WithFields(logrus.Fields{
-		"app":    "api",
-		"inf":    inf,
-		"action": action,
+		"app":       "sparrow",
+		"component": "api",
 	}).Info(message)
 }
 
 // Warn level logging
-func Warn(inf, action, message string) {
+func Warn(message string) {
 	logrus.WithFields(logrus.Fields{
-		"app":    "api",
-		"inf":    inf,
-		"action": action,
+		"app":       "sparrow",
+		"component": "api",
 	}).Warn(message)
 }
 
 // Fatal level logging
-func Fatal(inf, action, message string) {
+func Fatal(message string) {
 	logrus.WithFields(logrus.Fields{
-		"app":    "api",
-		"inf":    inf,
-		"action": action,
+		"app":       "sparrow",
+		"component": "api",
 	}).Fatal(message)
 }
-
-const INF_HOST = "HOST"
-const ACTION_HOST_CONFIGURE = "CONFIGURE"
-
-const INF_DATABASE = "DATABASE"
-const ACTION_DATABASE_CONNECT = "CONNECT"
-const ACTION_DATABASE_EXECUTE = "EXECUTE"
-
-const INF_API = "API"
-const ACTION_API_HOST = "EXECUTE"
