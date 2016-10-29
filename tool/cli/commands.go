@@ -6,7 +6,7 @@ import (
 	"github.com/goadesign/goa"
 	goaclient "github.com/goadesign/goa/client"
 	uuid "github.com/goadesign/goa/uuid"
-	"github.com/simplicate/sparrow.api/design/_temp_/client"
+	"github.com/simplicate/sparrow.api/client"
 	"github.com/spf13/cobra"
 	"golang.org/x/net/context"
 	"log"

@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/sparrow.api/design
-// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\design\_temp_
+// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -17,7 +17,7 @@ import (
 	"fmt"
 	"github.com/goadesign/goa"
 	"github.com/goadesign/goa/goatest"
-	"github.com/simplicate/sparrow.api/design/_temp_/app"
+	"github.com/simplicate/sparrow.api/app"
 	"golang.org/x/net/context"
 	"io"
 	"log"
