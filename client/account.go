@@ -10,7 +10,7 @@ import (
 
 // ReadAccountPath computes a request path to the read action of Account.
 func ReadAccountPath() string {
-	return fmt.Sprintf("/api/account")
+	return fmt.Sprintf("/account")
 }
 
 // read current account
@@ -38,7 +38,7 @@ func (c *Client) NewReadAccountRequest(ctx context.Context, path string) (*http.
 
 // UpdateAccountPath computes a request path to the update action of Account.
 func UpdateAccountPath() string {
-	return fmt.Sprintf("/api/account")
+	return fmt.Sprintf("/account")
 }
 
 // Update account

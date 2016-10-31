@@ -1,1 +1,556 @@
-{"swagger":"2.0","info":{"title":"Sparrow API","description":"Sparrow API","version":""},"host":"webapitester.com","schemes":["http"],"consumes":["application/json"],"produces":["application/json"],"paths":{"/api":{"get":{"tags":["meta"],"summary":"root meta","description":"Perform root check.","operationId":"meta#root","responses":{"200":{"description":"OK"}},"schemes":["http"]}},"/api/account":{"get":{"tags":["Account"],"summary":"read Account","description":"read current account","operationId":"Account#read","responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/Account"}},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}},"404":{"description":"Not Found"}},"schemes":["http"]},"put":{"tags":["Account"],"summary":"update Account","description":"Update account","operationId":"Account#update","parameters":[{"name":"payload","in":"body","required":true,"schema":{"$ref":"#/definitions/UpdateAccountPayload"}}],"responses":{"204":{"description":"No Content"},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}},"404":{"description":"Not Found"}},"schemes":["http"]}},"/api/health/alive":{"get":{"tags":["meta"],"summary":"alive meta","description":"Perform aliveness check.","operationId":"meta#alive","responses":{"200":{"description":"OK"}},"schemes":["http"]}},"/api/health/ready":{"get":{"tags":["meta"],"summary":"ready meta","description":"Perform readiness check.","operationId":"meta#ready","responses":{"200":{"description":"OK"}},"schemes":["http"]}},"/api/users":{"get":{"tags":["User"],"summary":"list User","description":"List users","operationId":"User#list","responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/UserCollection"}},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}}},"schemes":["http"]},"post":{"tags":["User"],"summary":"create User","description":"Create new user","operationId":"User#create","parameters":[{"name":"payload","in":"body","required":true,"schema":{"$ref":"#/definitions/CreateUserPayload"}}],"responses":{"201":{"description":"Resource created","headers":{"Location":{"description":"href to created resource","type":"string","pattern":"/users/[0-9]+"}}},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}}},"schemes":["http"]}},"/api/users/{id}":{"get":{"tags":["User"],"summary":"read User","description":"read user","operationId":"User#read","parameters":[{"name":"id","in":"path","description":"User id","required":true,"type":"integer"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/User"}},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}},"404":{"description":"Not Found"}},"schemes":["http"]},"put":{"tags":["User"],"summary":"update User","description":"Update user","operationId":"User#update","parameters":[{"name":"id","in":"path","description":"User id","required":true,"type":"integer"},{"name":"payload","in":"body","required":true,"schema":{"$ref":"#/definitions/UpdateUserPayload"}}],"responses":{"204":{"description":"No Content"},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}},"404":{"description":"Not Found"}},"schemes":["http"]},"delete":{"tags":["User"],"summary":"delete User","operationId":"User#delete","parameters":[{"name":"id","in":"path","description":"User id","required":true,"type":"integer"}],"responses":{"204":{"description":"No Content"},"400":{"description":"Bad Request","schema":{"$ref":"#/definitions/error"}},"404":{"description":"Not Found"}},"schemes":["http"]}},"/swagger.json":{"get":{"summary":"Download swagger/swagger.json","operationId":"swagger#/swagger.json","responses":{"200":{"description":"File downloaded","schema":{"type":"file"}}},"schemes":["http"]}},"/swagger.yaml":{"get":{"summary":"Download swagger/swagger.yaml","operationId":"swagger#/swagger.yaml","responses":{"200":{"description":"File downloaded","schema":{"type":"file"}}},"schemes":["http"]}}},"definitions":{"Account":{"title":"Mediatype identifier: application/vnd.account+json","type":"object","properties":{"name":{"type":"string","description":"Account name","example":"t","minLength":1,"maxLength":255}},"description":"An account (default view)","example":{"name":"t"},"required":["name"]},"CreateUserPayload":{"title":"CreateUserPayload","type":"object","properties":{"first_name":{"type":"string","example":"Corrupti perspiciatis labore."},"last_name":{"type":"string","example":"Dignissimos illo fugiat."}},"example":{"first_name":"Corrupti perspiciatis labore.","last_name":"Dignissimos illo fugiat."},"required":["first_name","last_name"]},"UpdateAccountPayload":{"title":"UpdateAccountPayload","type":"object","properties":{"name":{"type":"string","example":"Ratione nemo veritatis est."}},"example":{"name":"Ratione nemo veritatis est."}},"UpdateUserPayload":{"title":"UpdateUserPayload","type":"object","properties":{"first_name":{"type":"string","example":"Nemo est minus sit harum occaecati."},"last_name":{"type":"string","example":"Non aut dolores inventore aliquam qui."}},"example":{"first_name":"Nemo est minus sit harum occaecati.","last_name":"Non aut dolores inventore aliquam qui."}},"User":{"title":"Mediatype identifier: application/vnd.user+json; view=default","type":"object","properties":{"first_name":{"type":"string","description":"First name","example":"bikzd4guzv","minLength":1,"maxLength":255},"href":{"type":"string","description":"API href of user","example":"/users/1"},"id":{"type":"integer","description":"User id","example":8016643554357288348,"format":"int64"},"last_name":{"type":"string","description":"Last name","example":"z21","minLength":1,"maxLength":255},"name":{"type":"string","description":"name","example":"f6opai","minLength":1,"maxLength":255}},"description":"A user (default view)","example":{"first_name":"bikzd4guzv","href":"/users/1","id":8016643554357288348,"last_name":"z21","name":"f6opai"},"required":["id","href","first_name","last_name"]},"UserCollection":{"title":"Mediatype identifier: application/vnd.user+json; type=collection","type":"array","items":{"$ref":"#/definitions/User"},"description":"UserCollection is the media type for an array of User (default view)","example":[{"first_name":"bikzd4guzv","href":"/users/1","id":8016643554357288348,"last_name":"z21","name":"f6opai"},{"first_name":"bikzd4guzv","href":"/users/1","id":8016643554357288348,"last_name":"z21","name":"f6opai"}]},"error":{"title":"Mediatype identifier: application/vnd.goa.error","type":"object","properties":{"code":{"type":"string","description":"an application-specific error code, expressed as a string value.","example":"invalid_value"},"detail":{"type":"string","description":"a human-readable explanation specific to this occurrence of the problem.","example":"Value of ID must be an integer"},"id":{"type":"string","description":"a unique identifier for this particular occurrence of the problem.","example":"3F1FKVRR"},"meta":{"type":"object","description":"a meta object containing non-standard meta-information about the error.","example":{"timestamp":1458609066},"additionalProperties":true},"status":{"type":"string","description":"the HTTP status code applicable to this problem, expressed as a string value.","example":"400"}},"description":"Error response media type (default view)","example":{"code":"invalid_value","detail":"Value of ID must be an integer","id":"3F1FKVRR","meta":{"timestamp":1458609066},"status":"400"}}},"responses":{"NoContent":{"description":"No Content"},"NotFound":{"description":"Not Found"}}}
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Sparrow API",
+        "description": "Sparrow API",
+        "version": ""
+    },
+    "host": "api.webapitester.com",
+    "schemes": [
+        "http"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "tags": [
+                    "meta"
+                ],
+                "summary": "root meta",
+                "description": "Perform root check.",
+                "operationId": "meta#root",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/account": {
+            "get": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "read Account",
+                "description": "read current account",
+                "operationId": "Account#read",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Account"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Account"
+                ],
+                "summary": "update Account",
+                "description": "Update account",
+                "operationId": "Account#update",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateAccountPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/health/alive": {
+            "get": {
+                "tags": [
+                    "meta"
+                ],
+                "summary": "alive meta",
+                "description": "Perform aliveness check.",
+                "operationId": "meta#alive",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/health/ready": {
+            "get": {
+                "tags": [
+                    "meta"
+                ],
+                "summary": "ready meta",
+                "description": "Perform readiness check.",
+                "operationId": "meta#ready",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/swagger.json": {
+            "get": {
+                "summary": "Download swagger/swagger.json",
+                "operationId": "swagger#/swagger.json",
+                "responses": {
+                    "200": {
+                        "description": "File downloaded",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/swagger.yaml": {
+            "get": {
+                "summary": "Download swagger/swagger.yaml",
+                "operationId": "swagger#/swagger.yaml",
+                "responses": {
+                    "200": {
+                        "description": "File downloaded",
+                        "schema": {
+                            "type": "file"
+                        }
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "list User",
+                "description": "List users",
+                "operationId": "User#list",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/UserCollection"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            },
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "create User",
+                "description": "Create new user",
+                "operationId": "User#create",
+                "parameters": [
+                    {
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateUserPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Resource created",
+                        "headers": {
+                            "Location": {
+                                "description": "href to created resource",
+                                "type": "string",
+                                "pattern": "/users/[0-9]+"
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        },
+        "/users/{id}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "read User",
+                "description": "read user",
+                "operationId": "User#read",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            },
+            "put": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "update User",
+                "description": "Update user",
+                "operationId": "User#update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/UpdateUserPayload"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "delete User",
+                "operationId": "User#delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "schemes": [
+                    "http"
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Account": {
+            "title": "Mediatype identifier: application/vnd.account+json",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Account name",
+                    "example": "t",
+                    "minLength": 1,
+                    "maxLength": 255
+                }
+            },
+            "description": "An account (default view)",
+            "example": {
+                "name": "t"
+            },
+            "required": [
+                "name"
+            ]
+        },
+        "CreateUserPayload": {
+            "title": "CreateUserPayload",
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "example": "Corrupti perspiciatis labore."
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Dignissimos illo fugiat."
+                }
+            },
+            "example": {
+                "first_name": "Corrupti perspiciatis labore.",
+                "last_name": "Dignissimos illo fugiat."
+            },
+            "required": [
+                "first_name",
+                "last_name"
+            ]
+        },
+        "UpdateAccountPayload": {
+            "title": "UpdateAccountPayload",
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Ratione nemo veritatis est."
+                }
+            },
+            "example": {
+                "name": "Ratione nemo veritatis est."
+            }
+        },
+        "UpdateUserPayload": {
+            "title": "UpdateUserPayload",
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "example": "Nemo est minus sit harum occaecati."
+                },
+                "last_name": {
+                    "type": "string",
+                    "example": "Non aut dolores inventore aliquam qui."
+                }
+            },
+            "example": {
+                "first_name": "Nemo est minus sit harum occaecati.",
+                "last_name": "Non aut dolores inventore aliquam qui."
+            }
+        },
+        "User": {
+            "title": "Mediatype identifier: application/vnd.user+json; view=default",
+            "type": "object",
+            "properties": {
+                "first_name": {
+                    "type": "string",
+                    "description": "First name",
+                    "example": "bikzd4guzv",
+                    "minLength": 1,
+                    "maxLength": 255
+                },
+                "href": {
+                    "type": "string",
+                    "description": "API href of user",
+                    "example": "/users/1"
+                },
+                "id": {
+                    "type": "integer",
+                    "description": "User id",
+                    "example": 8016643554357288348,
+                    "format": "int64"
+                },
+                "last_name": {
+                    "type": "string",
+                    "description": "Last name",
+                    "example": "z21",
+                    "minLength": 1,
+                    "maxLength": 255
+                },
+                "name": {
+                    "type": "string",
+                    "description": "name",
+                    "example": "f6opai",
+                    "minLength": 1,
+                    "maxLength": 255
+                }
+            },
+            "description": "A user (default view)",
+            "example": {
+                "first_name": "bikzd4guzv",
+                "href": "/users/1",
+                "id": 8016643554357288348,
+                "last_name": "z21",
+                "name": "f6opai"
+            },
+            "required": [
+                "id",
+                "href",
+                "first_name",
+                "last_name"
+            ]
+        },
+        "UserCollection": {
+            "title": "Mediatype identifier: application/vnd.user+json; type=collection",
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/User"
+            },
+            "description": "UserCollection is the media type for an array of User (default view)",
+            "example": [
+                {
+                    "first_name": "bikzd4guzv",
+                    "href": "/users/1",
+                    "id": 8016643554357288348,
+                    "last_name": "z21",
+                    "name": "f6opai"
+                },
+                {
+                    "first_name": "bikzd4guzv",
+                    "href": "/users/1",
+                    "id": 8016643554357288348,
+                    "last_name": "z21",
+                    "name": "f6opai"
+                }
+            ]
+        },
+        "error": {
+            "title": "Mediatype identifier: application/vnd.goa.error",
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "an application-specific error code, expressed as a string value.",
+                    "example": "invalid_value"
+                },
+                "detail": {
+                    "type": "string",
+                    "description": "a human-readable explanation specific to this occurrence of the problem.",
+                    "example": "Value of ID must be an integer"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "a unique identifier for this particular occurrence of the problem.",
+                    "example": "3F1FKVRR"
+                },
+                "meta": {
+                    "type": "object",
+                    "description": "a meta object containing non-standard meta-information about the error.",
+                    "example": {
+                        "timestamp": 1458609066
+                    },
+                    "additionalProperties": true
+                },
+                "status": {
+                    "type": "string",
+                    "description": "the HTTP status code applicable to this problem, expressed as a string value.",
+                    "example": "400"
+                }
+            },
+            "description": "Error response media type (default view)",
+            "example": {
+                "code": "invalid_value",
+                "detail": "Value of ID must be an integer",
+                "id": "3F1FKVRR",
+                "meta": {
+                    "timestamp": 1458609066
+                },
+                "status": "400"
+            }
+        }
+    },
+    "responses": {
+        "NoContent": {
+            "description": "No Content"
+        },
+        "NotFound": {
+            "description": "Not Found"
+        }
+    }
+}

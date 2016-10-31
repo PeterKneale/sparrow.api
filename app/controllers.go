@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/sparrow.api/design
-// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\
+// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -41,7 +41,7 @@ type AccountController interface {
 func MountAccountController(service *goa.Service, ctrl AccountController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/api/account", ctrl.MuxHandler("preflight", handleAccountOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/account", ctrl.MuxHandler("preflight", handleAccountOrigin(cors.HandlePreflight()), nil))
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -56,8 +56,8 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 		return ctrl.Read(rctx)
 	}
 	h = handleAccountOrigin(h)
-	service.Mux.Handle("GET", "/api/account", ctrl.MuxHandler("Read", h, nil))
-	service.LogInfo("mount", "ctrl", "Account", "action", "Read", "route", "GET /api/account")
+	service.Mux.Handle("GET", "/account", ctrl.MuxHandler("Read", h, nil))
+	service.LogInfo("mount", "ctrl", "Account", "action", "Read", "route", "GET /account")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -78,8 +78,8 @@ func MountAccountController(service *goa.Service, ctrl AccountController) {
 		return ctrl.Update(rctx)
 	}
 	h = handleAccountOrigin(h)
-	service.Mux.Handle("PUT", "/api/account", ctrl.MuxHandler("Update", h, unmarshalUpdateAccountPayload))
-	service.LogInfo("mount", "ctrl", "Account", "action", "Update", "route", "PUT /api/account")
+	service.Mux.Handle("PUT", "/account", ctrl.MuxHandler("Update", h, unmarshalUpdateAccountPayload))
+	service.LogInfo("mount", "ctrl", "Account", "action", "Update", "route", "PUT /account")
 }
 
 // handleAccountOrigin applies the CORS response headers corresponding to the origin.
@@ -130,8 +130,8 @@ type UserController interface {
 func MountUserController(service *goa.Service, ctrl UserController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/api/users", ctrl.MuxHandler("preflight", handleUserOrigin(cors.HandlePreflight()), nil))
-	service.Mux.Handle("OPTIONS", "/api/users/:id", ctrl.MuxHandler("preflight", handleUserOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/users", ctrl.MuxHandler("preflight", handleUserOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/users/:id", ctrl.MuxHandler("preflight", handleUserOrigin(cors.HandlePreflight()), nil))
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -152,8 +152,8 @@ func MountUserController(service *goa.Service, ctrl UserController) {
 		return ctrl.Create(rctx)
 	}
 	h = handleUserOrigin(h)
-	service.Mux.Handle("POST", "/api/users", ctrl.MuxHandler("Create", h, unmarshalCreateUserPayload))
-	service.LogInfo("mount", "ctrl", "User", "action", "Create", "route", "POST /api/users")
+	service.Mux.Handle("POST", "/users", ctrl.MuxHandler("Create", h, unmarshalCreateUserPayload))
+	service.LogInfo("mount", "ctrl", "User", "action", "Create", "route", "POST /users")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -168,8 +168,8 @@ func MountUserController(service *goa.Service, ctrl UserController) {
 		return ctrl.Delete(rctx)
 	}
 	h = handleUserOrigin(h)
-	service.Mux.Handle("DELETE", "/api/users/:id", ctrl.MuxHandler("Delete", h, nil))
-	service.LogInfo("mount", "ctrl", "User", "action", "Delete", "route", "DELETE /api/users/:id")
+	service.Mux.Handle("DELETE", "/users/:id", ctrl.MuxHandler("Delete", h, nil))
+	service.LogInfo("mount", "ctrl", "User", "action", "Delete", "route", "DELETE /users/:id")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -184,8 +184,8 @@ func MountUserController(service *goa.Service, ctrl UserController) {
 		return ctrl.List(rctx)
 	}
 	h = handleUserOrigin(h)
-	service.Mux.Handle("GET", "/api/users", ctrl.MuxHandler("List", h, nil))
-	service.LogInfo("mount", "ctrl", "User", "action", "List", "route", "GET /api/users")
+	service.Mux.Handle("GET", "/users", ctrl.MuxHandler("List", h, nil))
+	service.LogInfo("mount", "ctrl", "User", "action", "List", "route", "GET /users")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -200,8 +200,8 @@ func MountUserController(service *goa.Service, ctrl UserController) {
 		return ctrl.Read(rctx)
 	}
 	h = handleUserOrigin(h)
-	service.Mux.Handle("GET", "/api/users/:id", ctrl.MuxHandler("Read", h, nil))
-	service.LogInfo("mount", "ctrl", "User", "action", "Read", "route", "GET /api/users/:id")
+	service.Mux.Handle("GET", "/users/:id", ctrl.MuxHandler("Read", h, nil))
+	service.LogInfo("mount", "ctrl", "User", "action", "Read", "route", "GET /users/:id")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -222,8 +222,8 @@ func MountUserController(service *goa.Service, ctrl UserController) {
 		return ctrl.Update(rctx)
 	}
 	h = handleUserOrigin(h)
-	service.Mux.Handle("PUT", "/api/users/:id", ctrl.MuxHandler("Update", h, unmarshalUpdateUserPayload))
-	service.LogInfo("mount", "ctrl", "User", "action", "Update", "route", "PUT /api/users/:id")
+	service.Mux.Handle("PUT", "/users/:id", ctrl.MuxHandler("Update", h, unmarshalUpdateUserPayload))
+	service.LogInfo("mount", "ctrl", "User", "action", "Update", "route", "PUT /users/:id")
 }
 
 // handleUserOrigin applies the CORS response headers corresponding to the origin.
@@ -287,9 +287,9 @@ type MetaController interface {
 func MountMetaController(service *goa.Service, ctrl MetaController) {
 	initService(service)
 	var h goa.Handler
-	service.Mux.Handle("OPTIONS", "/api/health/alive", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
-	service.Mux.Handle("OPTIONS", "/api/health/ready", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
-	service.Mux.Handle("OPTIONS", "/api", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/health/alive", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/health/ready", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
+	service.Mux.Handle("OPTIONS", "/", ctrl.MuxHandler("preflight", handleMetaOrigin(cors.HandlePreflight()), nil))
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -304,8 +304,8 @@ func MountMetaController(service *goa.Service, ctrl MetaController) {
 		return ctrl.Alive(rctx)
 	}
 	h = handleMetaOrigin(h)
-	service.Mux.Handle("GET", "/api/health/alive", ctrl.MuxHandler("Alive", h, nil))
-	service.LogInfo("mount", "ctrl", "Meta", "action", "Alive", "route", "GET /api/health/alive")
+	service.Mux.Handle("GET", "/health/alive", ctrl.MuxHandler("Alive", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Alive", "route", "GET /health/alive")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -320,8 +320,8 @@ func MountMetaController(service *goa.Service, ctrl MetaController) {
 		return ctrl.Ready(rctx)
 	}
 	h = handleMetaOrigin(h)
-	service.Mux.Handle("GET", "/api/health/ready", ctrl.MuxHandler("Ready", h, nil))
-	service.LogInfo("mount", "ctrl", "Meta", "action", "Ready", "route", "GET /api/health/ready")
+	service.Mux.Handle("GET", "/health/ready", ctrl.MuxHandler("Ready", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Ready", "route", "GET /health/ready")
 
 	h = func(ctx context.Context, rw http.ResponseWriter, req *http.Request) error {
 		// Check if there was an error loading the request
@@ -336,8 +336,8 @@ func MountMetaController(service *goa.Service, ctrl MetaController) {
 		return ctrl.Root(rctx)
 	}
 	h = handleMetaOrigin(h)
-	service.Mux.Handle("GET", "/api", ctrl.MuxHandler("Root", h, nil))
-	service.LogInfo("mount", "ctrl", "Meta", "action", "Root", "route", "GET /api")
+	service.Mux.Handle("GET", "/", ctrl.MuxHandler("Root", h, nil))
+	service.LogInfo("mount", "ctrl", "Meta", "action", "Root", "route", "GET /")
 }
 
 // handleMetaOrigin applies the CORS response headers corresponding to the origin.

@@ -9,7 +9,7 @@ import (
 
 // AliveMetaPath computes a request path to the alive action of meta.
 func AliveMetaPath() string {
-	return fmt.Sprintf("/api/health/alive")
+	return fmt.Sprintf("/health/alive")
 }
 
 // Perform aliveness check.
@@ -37,7 +37,7 @@ func (c *Client) NewAliveMetaRequest(ctx context.Context, path string) (*http.Re
 
 // ReadyMetaPath computes a request path to the ready action of meta.
 func ReadyMetaPath() string {
-	return fmt.Sprintf("/api/health/ready")
+	return fmt.Sprintf("/health/ready")
 }
 
 // Perform readiness check.
@@ -65,7 +65,7 @@ func (c *Client) NewReadyMetaRequest(ctx context.Context, path string) (*http.Re
 
 // RootMetaPath computes a request path to the root action of meta.
 func RootMetaPath() string {
-	return fmt.Sprintf("/api")
+	return fmt.Sprintf("/")
 }
 
 // Perform root check.
