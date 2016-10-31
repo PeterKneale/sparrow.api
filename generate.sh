@@ -10,7 +10,7 @@ goagen -d github.com/simplicate/sparrow.api/design gen --pkg-path=github.com/goa
 
 # tidy
 rm account.go
-rm health.go
+rm meta.go
 rm user.go
 mv swagger.go controllers/
 go build

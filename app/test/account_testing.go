@@ -4,7 +4,7 @@
 // Generated with goagen v1.0.0, command line:
 // $ goagen
 // --design=github.com/simplicate/sparrow.api/design
-// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api\
+// --out=$(GOPATH)\src\github.com\simplicate\sparrow.api
 // --version=v1.0.0
 //
 // The content of this file is auto-generated, DO NOT MODIFY
@@ -51,7 +51,7 @@ func ReadAccountBadRequest(t goatest.TInterface, ctx context.Context, service *g
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -115,7 +115,7 @@ func ReadAccountNotFound(t goatest.TInterface, ctx context.Context, service *goa
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -171,7 +171,7 @@ func ReadAccountOK(t goatest.TInterface, ctx context.Context, service *goa.Servi
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
@@ -239,7 +239,7 @@ func UpdateAccountBadRequest(t goatest.TInterface, ctx context.Context, service 
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("PUT", u.String(), nil)
 	if err != nil {
@@ -304,7 +304,7 @@ func UpdateAccountNoContent(t goatest.TInterface, ctx context.Context, service *
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("PUT", u.String(), nil)
 	if err != nil {
@@ -361,7 +361,7 @@ func UpdateAccountNotFound(t goatest.TInterface, ctx context.Context, service *g
 	// Setup request context
 	rw := httptest.NewRecorder()
 	u := &url.URL{
-		Path: fmt.Sprintf("/api/account"),
+		Path: fmt.Sprintf("/account"),
 	}
 	req, err := http.NewRequest("PUT", u.String(), nil)
 	if err != nil {

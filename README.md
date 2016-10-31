@@ -26,7 +26,7 @@ docker-machine ip dev
 
 ### Build the API Dockerfile
 ```
-env GOOS=linux GOARCH=386 go build
+go build
 docker build -t api .
 ```
 

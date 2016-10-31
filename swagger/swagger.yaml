@@ -151,13 +151,13 @@ definitions:
         type: string
     title: 'Mediatype identifier: application/vnd.goa.error'
     type: object
-host: webapitester.com
+host: api.webapitester.com
 info:
   description: Sparrow API
   title: Sparrow API
   version: ""
 paths:
-  /api:
+  /:
     get:
       description: Perform root check.
       operationId: meta#root
@@ -169,7 +169,7 @@ paths:
       summary: root meta
       tags:
       - meta
-  /api/account:
+  /account:
     get:
       description: read current account
       operationId: Account#read
@@ -212,7 +212,7 @@ paths:
       summary: update Account
       tags:
       - Account
-  /api/health/alive:
+  /health/alive:
     get:
       description: Perform aliveness check.
       operationId: meta#alive
@@ -224,7 +224,7 @@ paths:
       summary: alive meta
       tags:
       - meta
-  /api/health/ready:
+  /health/ready:
     get:
       description: Perform readiness check.
       operationId: meta#ready
@@ -236,7 +236,29 @@ paths:
       summary: ready meta
       tags:
       - meta
-  /api/users:
+  /swagger.json:
+    get:
+      operationId: swagger#/swagger.json
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - http
+      summary: Download swagger/swagger.json
+  /swagger.yaml:
+    get:
+      operationId: swagger#/swagger.yaml
+      responses:
+        "200":
+          description: File downloaded
+          schema:
+            type: file
+      schemes:
+      - http
+      summary: Download swagger/swagger.yaml
+  /users:
     get:
       description: List users
       operationId: User#list
@@ -280,7 +302,7 @@ paths:
       summary: create User
       tags:
       - User
-  /api/users/{id}:
+  /users/{id}:
     delete:
       operationId: User#delete
       parameters:
@@ -356,28 +378,6 @@ paths:
       summary: update User
       tags:
       - User
-  /swagger.json:
-    get:
-      operationId: swagger#/swagger.json
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - http
-      summary: Download swagger/swagger.json
-  /swagger.yaml:
-    get:
-      operationId: swagger#/swagger.yaml
-      responses:
-        "200":
-          description: File downloaded
-          schema:
-            type: file
-      schemes:
-      - http
-      summary: Download swagger/swagger.yaml
 produces:
 - application/json
 responses:

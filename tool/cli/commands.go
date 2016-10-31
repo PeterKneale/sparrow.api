@@ -95,7 +95,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp1 := new(AliveMetaCommand)
 	sub = &cobra.Command{
-		Use:   `meta ["/api/health/alive"]`,
+		Use:   `meta ["/health/alive"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp1.Run(c, args) },
 	}
@@ -109,7 +109,7 @@ func RegisterCommands(app *cobra.Command, c *client.Client) {
 	}
 	tmp2 := new(CreateUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/api/users"]`,
+		Use:   `User ["/users"]`,
 		Short: ``,
 		Long: `
 
@@ -131,7 +131,7 @@ Payload example:
 	}
 	tmp3 := new(DeleteUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/api/users/ID"]`,
+		Use:   `User ["/users/ID"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp3.Run(c, args) },
 	}
@@ -145,7 +145,7 @@ Payload example:
 	}
 	tmp4 := new(ListUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/api/users"]`,
+		Use:   `User ["/users"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp4.Run(c, args) },
 	}
@@ -159,7 +159,7 @@ Payload example:
 	}
 	tmp5 := new(ReadAccountCommand)
 	sub = &cobra.Command{
-		Use:   `Account ["/api/account"]`,
+		Use:   `Account ["/account"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp5.Run(c, args) },
 	}
@@ -168,7 +168,7 @@ Payload example:
 	command.AddCommand(sub)
 	tmp6 := new(ReadUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/api/users/ID"]`,
+		Use:   `User ["/users/ID"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp6.Run(c, args) },
 	}
@@ -182,7 +182,7 @@ Payload example:
 	}
 	tmp7 := new(ReadyMetaCommand)
 	sub = &cobra.Command{
-		Use:   `meta ["/api/health/ready"]`,
+		Use:   `meta ["/health/ready"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp7.Run(c, args) },
 	}
@@ -196,7 +196,7 @@ Payload example:
 	}
 	tmp8 := new(RootMetaCommand)
 	sub = &cobra.Command{
-		Use:   `meta ["/api"]`,
+		Use:   `meta ["/"]`,
 		Short: ``,
 		RunE:  func(cmd *cobra.Command, args []string) error { return tmp8.Run(c, args) },
 	}
@@ -210,7 +210,7 @@ Payload example:
 	}
 	tmp9 := new(UpdateAccountCommand)
 	sub = &cobra.Command{
-		Use:   `Account ["/api/account"]`,
+		Use:   `Account ["/account"]`,
 		Short: ``,
 		Long: `
 
@@ -226,7 +226,7 @@ Payload example:
 	command.AddCommand(sub)
 	tmp10 := new(UpdateUserCommand)
 	sub = &cobra.Command{
-		Use:   `User ["/api/users/ID"]`,
+		Use:   `User ["/users/ID"]`,
 		Short: ``,
 		Long: `
 
@@ -460,7 +460,7 @@ func (cmd *ReadAccountCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/account"
+		path = "/account"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -484,7 +484,7 @@ func (cmd *UpdateAccountCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/account"
+		path = "/account"
 	}
 	var payload client.UpdateAccountPayload
 	if cmd.Payload != "" {
@@ -517,7 +517,7 @@ func (cmd *CreateUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/users"
+		path = "/users"
 	}
 	var payload client.CreateUserPayload
 	if cmd.Payload != "" {
@@ -550,7 +550,7 @@ func (cmd *DeleteUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/api/users/%v", cmd.ID)
+		path = fmt.Sprintf("/users/%v", cmd.ID)
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -576,7 +576,7 @@ func (cmd *ListUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/users"
+		path = "/users"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -600,7 +600,7 @@ func (cmd *ReadUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/api/users/%v", cmd.ID)
+		path = fmt.Sprintf("/users/%v", cmd.ID)
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -626,7 +626,7 @@ func (cmd *UpdateUserCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = fmt.Sprintf("/api/users/%v", cmd.ID)
+		path = fmt.Sprintf("/users/%v", cmd.ID)
 	}
 	var payload client.UpdateUserPayload
 	if cmd.Payload != "" {
@@ -661,7 +661,7 @@ func (cmd *AliveMetaCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/health/alive"
+		path = "/health/alive"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -685,7 +685,7 @@ func (cmd *ReadyMetaCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api/health/ready"
+		path = "/health/ready"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)
@@ -709,7 +709,7 @@ func (cmd *RootMetaCommand) Run(c *client.Client, args []string) error {
 	if len(args) > 0 {
 		path = args[0]
 	} else {
-		path = "/api"
+		path = "/"
 	}
 	logger := goa.NewLogger(log.New(os.Stderr, "", log.LstdFlags))
 	ctx := goa.WithLogger(context.Background(), logger)

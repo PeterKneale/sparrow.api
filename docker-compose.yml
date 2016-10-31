@@ -1,0 +1,46 @@
+version: '2'
+services:
+
+  lb:
+    image: dockercloud/haproxy
+    depends_on:
+      - api
+      - web
+    links:
+      - api
+      - web
+    environment:
+      - ADDITIONAL_SERVICES=project_dir:web,project_dir:api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 80:80
+
+  web:  
+    image: web
+    ports:
+      - "81:80"
+    depends_on:
+      - api
+  
+  api:  
+    image: api:tiny
+    ports:
+      - "8080:80"
+    links:
+      - db
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_DATABASE: "${DB_DATABASE}"
+      DB_USER: "${DB_USER}"
+      DB_PASSWORD: "${DB_PASSWORD}"
+      DB_PORT: "${DB_PORT}"
+
+  db:
+    image: 'postgres'
+    environment:
+      POSTGRES_DB: "${DB_DATABASE}"
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"

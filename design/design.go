@@ -8,9 +8,8 @@ import (
 var _ = API("Sparrow API", func() {
 	Title("Sparrow API")
 	Description("Sparrow API")
-	Host("webapitester.com")
+	Host("api.webapitester.com")
 	Scheme("http")
-	BasePath("/api")
 
 	Consumes("application/json")
 	Produces("application/json")
