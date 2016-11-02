@@ -1,22 +1,18 @@
 # Sparrow
 Sparrow Project
 
+## Generation of api and models
+```
+./generate.sh
+```
+
 ## RUNNING LOCALLY
-### Setup environment variables that point to a database
-```
-export DB_HOST=localhost
-export DB_DATABASE=sparrow
-export DB_USER=postgres
-export DB_PASSWORD=password
-export DB_PORT=5432
-```
-### Run the API
 ```
 ./sparrow.api.exe
 ```
 
-## HOSTING IN DOCKER
 
+## HOSTING IN DOCKER
 ### Setup docker machine environment and update the shell to use it
 ```
 docker-machine create --driver virtualbox dev
@@ -27,48 +23,20 @@ docker-machine ip dev
 ### Build the API Dockerfile
 ```
 go build
-docker build -t api .
+docker build -t api -f Dockerfile.debug
 ```
 
 ### Run DB
 ```
 docker run --name db \
-    -e DB_DATABASE=sparrowdb \
-    -e DB_USERNAME=sparrow \
-    -e DB_PASSWORD=password \
-    -p 5432:5432 \
-    -d postgres
-
-docker logs db
-docker inspect db | grep IPAddress
-```
-
-### Run API
-```
+    -d postgres \
+    -p 5432:5432 
 docker run --name api \
-    -e DB_DATABASE=sparrowdb \
-    -e DB_USERNAME=sparrow \
-    -e DB_PASSWORD=password \
-    -p 8080:8080 \
-    --link db:db
-    -d api 
-
+    --link db:db \
+    -d api \ 
+    -p 80:80 
 docker logs api
-docker inspect api | grep IPAddress
-```
-
-### Run Tests
-```
-docker-machine ip dev
-curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/users
-curl -v -i -H "Accept: application/json" http://192.168.99.102:8080/swagger.json
-```
-
-## Other Commands
-
-### Generation of api and models
-```
-./generate.sh
+docker inspect db | grep IPAddress
 ```
 
 ### Stop and remove all docker instances
