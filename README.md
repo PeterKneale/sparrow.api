@@ -1,46 +1,41 @@
 # Sparrow
-Sparrow Project
-
-## Generation of api and models
-```
-./generate.sh
-```
-
-## RUNNING LOCALLY
-```
-./sparrow.api.exe
-```
+Sparrow API
 
 
-## HOSTING IN DOCKER
-### Setup docker machine environment and update the shell to use it
-```
-docker-machine create --driver virtualbox dev
-eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env dev) 
-docker-machine ip dev
-```
+## Publish Docker Images to Registry
 
-### Build the API Dockerfile
-```
-go build
-docker build -t api -f Dockerfile.debug
-```
+ - Build the `debug` docker image using the GOLANG base image (~ 600MB, good for diagnostics)
+    ```
+    go build
+    docker build -t sparrow/api-debug Dockerfile.debug .
+    docker tag -f sparrow/api-debug gcr.io/simplicate-sparrow-project/api-debug
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-debug
+    ```
 
-### Run DB
+- Build the `release` docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
+    ```
+    CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
+    docker build -t sparrow/api-release -f Dockerfile.release .
+    docker tag -f sparrow/api-release gcr.io/simplicate-sparrow-project/api-release
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-release
+    ```
+
+
+### Run
 ```
 docker run --name db \
     -d postgres \
     -p 5432:5432 
+    
 docker run --name api \
     --link db:db \
-    -d api \ 
+    -d sparrow/api-debug \ 
     -p 80:80 
-docker logs api
-docker inspect db | grep IPAddress
 ```
 
-### Stop and remove all docker instances
-```
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-```
+### STOP
+- delete local containers and images
+    ```
+    docker rm -f $(docker ps -a -q)
+    docker rmi -f $(docker images -q)
+    ```
