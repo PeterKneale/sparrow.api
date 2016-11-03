@@ -7,7 +7,7 @@ Sparrow API
  - Build the `debug` docker image using the GOLANG base image (~ 600MB, good for diagnostics)
     ```
     go build
-    docker build -t sparrow/api-debug Dockerfile.debug .
+    docker build -t sparrow/api-debug -f Dockerfile.debug .
     docker tag sparrow/api-debug gcr.io/simplicate-sparrow-project/api-debug
     gcloud docker -- push gcr.io/simplicate-sparrow-project/api-debug
     ```
