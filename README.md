@@ -8,16 +8,16 @@ Sparrow API
     ```
     go build
     docker build -t sparrow/api-debug -f Dockerfile.debug .
-    docker tag sparrow/api-debug gcr.io/simplicate-sparrow-project/api-debug
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-debug
+    docker tag sparrow/api-debug gcr.io/simplicate-sparrow-project/api-dev
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-dev
     ```
 
 - Build the `release` docker image using the ALPINE base image. (~ 10MB and note it is compiled differently)
     ```
     CC=$(which musl-gcc) go build --ldflags '-w -linkmode external -extldflags "-static"'
     docker build -t sparrow/api-release -f Dockerfile.release .
-    docker tag sparrow/api-release gcr.io/simplicate-sparrow-project/api-release
-    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-release
+    docker tag sparrow/api-release gcr.io/simplicate-sparrow-project/api-dev
+    gcloud docker -- push gcr.io/simplicate-sparrow-project/api-dev
     ```
 
 
