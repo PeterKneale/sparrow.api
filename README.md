@@ -1,6 +1,5 @@
 # Sparrow
 Sparrow API
- 
 
 ## Publish Docker Images to Registry
 
