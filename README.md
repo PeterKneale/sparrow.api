@@ -1,6 +1,9 @@
 # Sparrow
 Sparrow API
- 
+
+User Management
+Account Management
+Device Management (alpha)
 
 ## Publish Docker Images to Registry
 
