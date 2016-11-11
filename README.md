@@ -2,8 +2,11 @@
 Sparrow API
 
 User Management
+- create,read,update,delete,list
 Account Management
+- read,update
 Device Management (alpha)
+- nothing
 
 ## Publish Docker Images to Registry
 
