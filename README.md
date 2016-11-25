@@ -1,6 +1,5 @@
 # Sparrow
 Sparrow API
-<<<<<<< HEAD
 =======
 
 User Management
@@ -9,7 +8,6 @@ Account Management
 - read,update
 Device Management (alpha)
 - nothing
->>>>>>> a64c8bc8c0c674fa42a9dcfebda5d67f935c9912
 
 ## Publish Docker Images to Registry
 
